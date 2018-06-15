@@ -39,5 +39,20 @@
 </script>
 
 <script type="text/x-red" data-help-name="signalk-notification">
-    <p>A simple node that converts the message payloads into all lower-case characters</p>
+<p>Input that sends a message when a notification is received. Configuration allows messages for a specific notification or any notification. The notification state can also be specified. Payload will be the notification path and value.</p>
+
+<pre><code class="javascript">
+{
+  "path: "notifications.anchorAlarm",
+  "value" : {
+    "state" : "emergency",
+    "method" : [
+      "visual",
+      "sound"
+    ],
+    "timestamp" : "2018-06-15T15:01:55.007Z",
+    "message" : "Anchor Alarm - Emergency"
+  }
+}
+</code></pre>
 </script>
