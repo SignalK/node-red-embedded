@@ -35,7 +35,7 @@ Output that sends a delta through the server. Input should be path and value
 
 ## signalk-notification
 
-Input that sends a message when a notification is received. Configuration allows messages for a specific notification or any notification. The notification state can also be specified. Payload will be the notificatiob path and value.
+Input that sends a message when a notification is received. Configuration allows messages for a specific notification or any notification. The notification state can also be specified. Payload will be the notification path and value.
 
 ```
 {
