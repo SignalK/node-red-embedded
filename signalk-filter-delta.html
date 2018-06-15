@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-filter-delta',{
+    category: 'function',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+      context: { value: "vessels.self"},
+      path: {value:""}
+    },
+    inputs:1,
+    outputs:1,
+    icon: "function.png",
+    label: function() {
+      return this.name||"signalk-filter-delta";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-filter-delta">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-context"><i class="icon-tag"></i> Context</label>
+        <input type="text" id="node-input-context" placeholder="Context">
+  </div>
+  <div class="form-row">
+        <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+        <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-filter-delta">
+    <p>A simple node that converts the message payloads into all lower-case characters</p>
+</script>

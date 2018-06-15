@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-send-delta',{
+    category: 'output',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+    },
+    inputs:1,
+    outputs:1,
+    icon: "bridge.png",
+    label: function() {
+      return this.name||"signalk-send-delta";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-send-delta">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-send-delta">
+    <p>A simple node that converts the message payloads into all lower-case characters</p>
+</script>
