@@ -7,19 +7,21 @@ Node red nodes for use with the signalk-node-red plugin
 
 Input that sends messages for every delta the server receives
 
-## signalk-filter-delta
+## signalk-flatten-delta
 
-Function that filters a specific delta from signalk-on-delta.
+Function that flatten deltas from signalk-on-delta.
 
-The payload with be the path, value and source:
+The output payload with be have path, value, source and context:
 
 ```
 {
   "path":"navigation.speedOverGround",
   "value":2.45,
-  "source":{"label":"actisense","type":"NMEA2000","pgn":129026,"src":"3"
+  "source":{"label":"actisense","type":"NMEA2000","pgn":129026,"src":"3",
+  "context": "vessels.self"
 }
 ```
+
 ## signalk-send-pathvalue
 
 Output that sends a delta through the server. Input should be path and value
