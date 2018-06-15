@@ -11,12 +11,13 @@ Input that send messages for every delta the server sends
 
 Function that filters a specific delta from signalk-on-delta.
 
-The payload with be just the path and value:
+The payload with be the path, value and source:
 
 ```
 {
   "path":"navigation.speedOverGround",
-  "value":2.45
+  "value":2.45,
+  "source":{"label":"langford-canboatjs","type":"NMEA2000","pgn":129026,"src":"3"
 }
 ```
 ## signalk-send-pathvalue
