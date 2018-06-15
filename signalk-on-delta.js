@@ -6,8 +6,14 @@ module.exports = function(RED) {
 
     var signalk = node.context().global.get('signalk')
 
-    signalk.on('delta', delta => {
+    function on_delta(delta) {
       node.send({ payload: delta })
+    }
+    
+    signalk.on('delta', on_delta)
+
+    node.on('close', function() {
+      signalk.removeListener('delta', on_delta)
     })
   }
   RED.nodes.registerType("signalk-on-delta", SignalKOnDelta);
