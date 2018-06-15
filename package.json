@@ -12,7 +12,7 @@
     "nodes": {
       "signalk-on-delta": "signalk-on-delta.js",
       "signalk-notification-": "signalk-notification.js",
-      "signalk-filter-delta": "signalk-filter-delta.js",
+      "signalk-flatten-delta": "signalk-flatten-delta.js",
       "signalk-send-delta": "signalk-send-delta.js",
       "signalk-send-pathvalue": "signalk-send-pathvalue.js",
       "signalk-send-put": "signalk-send-put.js"

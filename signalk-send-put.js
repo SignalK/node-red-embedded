@@ -7,7 +7,6 @@ module.exports = function(RED) {
     var app = node.context().global.get('app')
     
     node.on('input', msg => {
-      node.log(`setting ${config.path} to ${msg.payload}`)
       app.putSelfPath(config.path, msg.payload)
     })
   }
