@@ -12,7 +12,10 @@ module.exports = function(RED) {
             if ( update.values ) {
               update.values.forEach(pathValue => {
                 if ( pathValue.path == config.path ) {
-                  node.send({ payload: pathValue})
+                  let copy = JSON.parse(JSON.stringify(pathValue))
+                  copy.$source = update.$source
+                  copy.source = update.source
+                  node.send({ payload: copy})
                 }
               })
             }
