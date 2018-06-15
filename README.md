@@ -5,7 +5,7 @@ Node red nodes for use with the signalk-node-red plugin
 
 ## signalk-on-delta
 
-Input that send messages for every delta the server sends
+Input that sends messages for every delta the server receives
 
 ## signalk-filter-delta
 
