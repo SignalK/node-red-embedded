@@ -56,4 +56,7 @@ Input that sends a message when a notification is received. Configuration allows
 
 Output that sends a delta to the server. Input should be a fully formed SignalK delta
 
+## signalk-send-put
+
+Output that send a SignalK put request via `app.putSelfPath`. Input should be the value to put.
 
