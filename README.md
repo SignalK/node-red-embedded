@@ -17,7 +17,7 @@ The payload with be the path, value and source:
 {
   "path":"navigation.speedOverGround",
   "value":2.45,
-  "source":{"label":"langford-canboatjs","type":"NMEA2000","pgn":129026,"src":"3"
+  "source":{"label":"actisense","type":"NMEA2000","pgn":129026,"src":"3"
 }
 ```
 ## signalk-send-pathvalue
