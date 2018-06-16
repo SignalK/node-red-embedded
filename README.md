@@ -1,6 +1,8 @@
 # node-red-embedded
 Node red nodes for use with the signalk-node-red plugin
 
+See the examples folder for some sample usage.
+
 # Available Nodes
 
 ## signalk-on-delta
