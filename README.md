@@ -14,6 +14,9 @@ See the examples folder for some sample usage.
 ## Send an alarm when wind speed is high
 ![Alt text](screens/high-wind-speed-alarm.jpeg)
 
+## Send an alarm when the AC input voltage is low and the boat is in its slip
+![Alt text](screens/ac-in-voltage-alarm.jpeg)
+
 # Available Nodes
 
 ## signalk-on-delta
