@@ -1,0 +1,37 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-send-nmea2000',{
+    category: 'output',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+      nmea2000Event: {value: "nmea2000out"},
+      nmea2000JsonEvent: {value: "nmea2000JsonOut"}
+    },
+    inputs:1,
+    outputs:0,
+    icon: "bridge.png",
+    align: 'right',
+    label: function() {
+      return this.name||"signalk-send-nmea2000";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-send-nmea2000">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-nmea2000Event"><i class="icon-tag"></i> NMEA2000 Event</label>
+        <input type="text" id="node-input-nmea2000Event" placeholder="NMEA2000 Event">
+  </div>
+  <div class="form-row">
+        <label for="node-input-nmea2000JsonEvent"><i class="icon-tag"></i> NMEA2000 Json Event</label>
+        <input type="text" id="node-input-nmea2000JsonEvent" placeholder="NMEA2000 Json Event">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-send-nmea2000">
+  <p>Output that sends out NMEA 2000 messages. Input payload can be canboat json format or a raw Actisense formatted string </p>
+</script>

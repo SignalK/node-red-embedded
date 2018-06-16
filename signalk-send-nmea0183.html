@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-send-nmea0183',{
+    category: 'output',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+      nmea0183Event: {value: "nmea0183out"}
+    },
+    inputs:1,
+    outputs:0,
+    icon: "bridge.png",
+    align: 'right',
+    label: function() {
+      return this.name||"signalk-send-nmea0183";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-send-nmea0183">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-nmea0183Event"><i class="icon-tag"></i> NMEA0183 Event</label>
+        <input type="text" id="node-input-nmea0183Event" placeholder="NMEA0183 Event">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-send-nmea0183">
+  <p>Output that sends out NMEA 0183 messages. Input payload can be an 0183 formatted string. </p>
+</script>
