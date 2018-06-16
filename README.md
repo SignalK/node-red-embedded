@@ -85,3 +85,10 @@ Or to specify some of the info, send:
 }}
 ```
 
+## signalk-send-nmea2000
+
+Output that sends out NMEA 2000 messages. Input payload can be canboat json format or a raw Actisense formatted string
+
+## signalk-send-nmea0183
+
+Output that sends out NMEA 0183 messages. Input payload can be an 0183 formatted string.
