@@ -60,3 +60,26 @@ Output that sends a delta to the server. Input should be a fully formed SignalK 
 
 Output that send a SignalK put request via `app.putSelfPath`. Input should be the value to put.
 
+## signalk-send-notification
+
+Output that sends a SignalK notification
+
+If the input payload is an object, then it will use the keys path, state, method, and message. Example below. Otherwise  it will use the configured values.
+
+To specify all the info, send:
+```
+{payload: {
+  "path":"notifications.testNotification",
+  "state":"alarm",
+  "method":["visual","sound"],
+  "message":"this is a notification message"
+}}
+```
+
+Or to specify some of the info, send:
+```
+{payload: {
+  "state":"normal",
+}}
+```
+
