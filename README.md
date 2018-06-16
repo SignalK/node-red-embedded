@@ -3,6 +3,17 @@ Node red nodes for use with the signalk-node-red plugin
 
 See the examples folder for some sample usage.
 
+# Examples
+
+## Send an adjusted depth value
+![Alt text](screens/adjust-depth.jpeg)
+
+## Switch relays based on complex conditions (example turns on/off the anchor light and ACR automatically)
+![Alt text](screens/switch-automation.jpeg)
+
+## Send an alarm when wind speed is high
+![Alt text](screens/high-wind-speed-alarm.jpeg)
+
 # Available Nodes
 
 ## signalk-on-delta
