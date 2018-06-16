@@ -13,7 +13,7 @@ module.exports = function(RED) {
               pathValue.$source = update.$source
               pathValue.source = update.source
               pathValue.context = delta.context
-              node.send({ payload: pathValue})
+              node.send({ payload: pathValue, topic: pathValue.path})
             })
           }
         })
