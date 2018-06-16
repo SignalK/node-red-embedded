@@ -42,7 +42,6 @@ module.exports = function(RED) {
           }
         ]
       }
-      node.log(JSON.stringify(delta))
       app.handleMessage('signalk-node-red', delta)
     })
   }
