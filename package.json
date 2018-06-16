@@ -15,7 +15,8 @@
       "signalk-flatten-delta": "signalk-flatten-delta.js",
       "signalk-send-delta": "signalk-send-delta.js",
       "signalk-send-pathvalue": "signalk-send-pathvalue.js",
-      "signalk-send-put": "signalk-send-put.js"
+      "signalk-send-put": "signalk-send-put.js",
+      "signalk-send-notification": "signalk-send-notification.js"
     }
   }
 }

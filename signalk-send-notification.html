@@ -1,0 +1,81 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-send-notification',{
+    category: 'output',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+      path: {value: ""},
+      state: {value:"alarm"},
+      message: {value: ""},
+      visual: {value: true},
+      sound: {value: true}
+    },
+    inputs:1,
+    outputs:0,
+    align: 'right',
+    icon: "bridge.png",
+    label: function() {
+      return this.name||"signalk-send-notification";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-send-notification">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+        <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+  <div class="form-row">
+  <label for="node-input-state"><i class="icon-tag"></i> State</label>
+  <select id="node-input-state" placeholder="State">
+    <option value="normal">Normal</option>
+    <option value="alert">Alert</option>
+    <option value="warn">Warn</option>
+    <option value="alarm">Alarm</option>
+   <option value="emergency">Emergency</option>
+  </select>
+  </div>
+  <div class="form-row">
+        <label for="node-input-visual"><i class="icon-tag"></i> Visual</label>
+        <input type="checkbox" id="node-input-visual" placeholder="Visual">
+  </div>
+  <div class="form-row">
+        <label for="node-input-sound"><i class="icon-tag"></i> Sound</label>
+        <input type="checkbox" id="node-input-sound" placeholder="Sound">
+  </div>
+  <div class="form-row">
+        <label for="node-input-message"><i class="icon-tag"></i> Message</label>
+        <input type="text" id="node-input-message" placeholder="Message">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-send-notification">
+
+  <p>Output that sends a SignalK notification</p>
+
+  <p>If the input payload is an object, then it will use the keys path, state, method, and message. Example below. Otherwise  it will use the configured values.</p
+
+<p>To specify all the info, send:</p>
+  <pre><code class="javascript">
+{payload: {
+  "path":"notifications.testNotification",
+  "state":"alarm",
+  "method":["visual","sound"],
+  "message":"this is a notification message"
+}}
+</code></pre>
+
+<p>Or to specify some of the info, send:</p>
+  <pre><code class="javascript">
+{payload: {
+  "state":"normal",
+}}
+</code></pre>
+
+
+
+</script>
