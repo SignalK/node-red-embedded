@@ -23,6 +23,10 @@ See the examples folder for some sample usage.
 
 Input that sends messages for every delta the server receives
 
+## signalk-subscribe
+
+Input that sends messages for every delta from the given path
+
 ## signalk-flatten-delta
 
 Function that flatten deltas from signalk-on-delta.
