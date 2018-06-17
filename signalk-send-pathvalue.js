@@ -12,7 +12,10 @@ module.exports = function(RED) {
         updates: [
           {
             values: [
-              msg.payload
+              {
+                value: msg.payload,
+                path: msg.topic
+              }
             ]
           }
         ]

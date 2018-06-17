@@ -21,24 +21,25 @@ See the examples folder for some sample usage.
 
 ## signalk-on-delta
 
-Input that sends messages for every delta the server receives
+Input that sends messages for every delta the server receives. Optionally flatten the deltas (see signalk-flatten-delta below)
 
 ## signalk-subscribe
 
-Input that sends messages for every delta from the given path
+Input that sends messages for every delta from the configured path. Optionally flatten the deltas (see signalk-flatten-delta below)
 
 ## signalk-flatten-delta
 
 Function that flatten deltas from signalk-on-delta.
 
-The output payload with be have path, value, source and context:
+The output payload will be the value and the topic will be the path, The payload will also include context, $source, and source.
 
 ```
 {
-  "path":"navigation.speedOverGround",
-  "value":2.45,
-  "source":{"label":"actisense","type":"NMEA2000","pgn":129026,"src":"3",
-  "context": "vessels.self"
+  "topic": "navigation.speedOverGround",
+  "payload": 2.45,
+  "source": {"label":"actisense","type":"NMEA2000","pgn":129026,"src":"3"},
+  "context": "vessels.self",
+  "$source": "actisense.3"
 }
 ```
 

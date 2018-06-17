@@ -10,6 +10,7 @@
   "license": "Apache-2.0",
   "node-red": {
     "nodes": {
+      "signalk-subscribe": "signalk-subscribe.js",
       "signalk-on-delta": "signalk-on-delta.js",
       "signalk-notification-": "signalk-notification.js",
       "signalk-flatten-delta": "signalk-flatten-delta.js",
@@ -18,8 +19,7 @@
       "signalk-send-put": "signalk-send-put.js",
       "signalk-send-notification": "signalk-send-notification.js",
       "signalk-send-nmea2000": "signalk-send-nmea2000.js",
-      "signalk-send-nmea0183": "signalk-send-nmea0183.js",
-      "signalk-subscribe": "signalk-subscribe.js"
+      "signalk-send-nmea0183": "signalk-send-nmea0183.js"
     }
   }
 }

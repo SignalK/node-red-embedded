@@ -3,7 +3,9 @@
         category: 'input',
         color: '#ffcc01',
         defaults: {
-            name: {value:""}
+          name: {value:""},
+          context: {value: "vessels.self"},
+          flatten: {value: true},
         },
         inputs:0,
         outputs:1,
@@ -15,10 +17,18 @@
 </script>
 
 <script type="text/x-red" data-template-name="signalk-on-delta">
-    <div class="form-row">
+  <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
-    </div>
+  </div>
+  <div class="form-row">
+        <label for="node-input-context"><i class="icon-tag"></i> Context</label>
+        <input type="text" id="node-input-context" placeholder="Context">
+  </div>
+  <div class="form-row">
+        <label for="node-input-flatten"><i class="icon-tag"></i> Flatten</label>
+        <input type="checkbox" id="node-input-flatten" placeholder="Flatten">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="signalk-on-delta">

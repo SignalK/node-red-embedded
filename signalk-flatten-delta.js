@@ -10,10 +10,13 @@ module.exports = function(RED) {
         delta.updates.forEach(update => {
           if ( update.values ) {
             update.values.forEach(pathValue => {
-              pathValue.$source = update.$source
-              pathValue.source = update.source
-              pathValue.context = delta.context
-              node.send({ payload: pathValue, topic: pathValue.path})
+              node.send({
+                $source: update.$source,
+                source: update.source,
+                context: delta.context,
+                payload: pathValue.value,
+                topic: pathValue.path
+              })
             })
           }
         })
