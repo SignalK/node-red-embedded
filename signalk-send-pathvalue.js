@@ -8,7 +8,7 @@ module.exports = function(RED) {
     var source = config.name ? 'node-red-' + config.name : 'node-red'
     
     node.on('input', msg => {
-      app.handleMessage(source, {
+      let delta = {
         updates: [
           {
             values: [
@@ -19,7 +19,11 @@ module.exports = function(RED) {
             ]
           }
         ]
-      })
+      }
+      if ( config.source && config.source.length > 0 ) {
+        delta.updates[0].$source = config.source
+      }
+      app.handleMessage(source, delta)
     })
   }
   RED.nodes.registerType("signalk-send-pathvalue", signalKSendPathValue);
