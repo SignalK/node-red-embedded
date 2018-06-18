@@ -73,6 +73,10 @@ Input that sends a message when a notification is received. Configuration allows
 }
 ```
 
+## signalk-geofence
+
+Input that checks if a vessel is inside of the specified geofence
+
 ## signalk-send-delta
 
 Output that sends a delta to the server. Input should be a fully formed SignalK delta
