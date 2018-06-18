@@ -51,6 +51,12 @@ The output payload will be the value and the topic will be the path, The payload
 
 Function that checks if a vessel is inside of the specified geofence
 
+## signalk-delay
+
+Function that will delay sending the input until the value has been the same for the given timout
+
+For example, you could use this to send a low starter battery voltage alarm only if it stays low for 5 seconds.
+
 ## signalk-send-pathvalue
 
 Output that sends a delta through the server. Input should be path and value

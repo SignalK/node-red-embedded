@@ -1,0 +1,35 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-delay',{
+    category: 'function',
+    color: '#ffcc01',
+    defaults: {
+      name: {value:""},
+      delay: {value: 5000}
+    },
+    inputs:1,
+    outputs:1,
+    icon: "function.png",
+    label: function() {
+      return this.name||"signalk-delay";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-delay">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+  <label for="node-input-delay"><i class="icon-tag"></i> Delay (ms)</label>
+        <input type="text" id="node-input-delay" placeholder="Delay">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-delay">
+  <p>Function that will delay sending the input until the value has been the same for the given timout<p>
+
+  <p>For example, you could use this to send a low starter battery voltage alarm only if it stays low for 5 seconds. </p>
+
+</code></pre>
+</script>
