@@ -1,1 +1,253 @@
-[{"id":"8bdea88.abe9658","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"ca4ac3ec.4bba3","type":"change","z":"8bdea88.abe9658","name":"Add 1.0","rules":[{"t":"set","p":"payload","pt":"msg","to":"payload +  1.0","tot":"jsonata"}],"action":"","property":"","from":"","to":"","reg":false,"x":420,"y":60,"wires":[["e1a68487.819c28"]]},{"id":"e1a68487.819c28","type":"signalk-send-pathvalue","z":"8bdea88.abe9658","name":"","source":"","x":630,"y":60,"wires":[]},{"id":"298fb1f.153a74e","type":"signalk-subscribe","z":"8bdea88.abe9658","name":"environment.depth.belowSurface","flatten":true,"context":"vessels.self","path":"environment.depth.belowSurface","period":1000,"x":170,"y":60,"wires":[["45de362b.566a"]]},{"id":"99b572f6.2f8c2","type":"signalk-geofence","z":"8bdea88.abe9658","name":"","context":"vessels.self","period":"1000","myposition":false,"lat":"39.063125","lon":"-77.4872533333333","distance":"15","x":100,"y":460,"wires":[[],[],["aef0ca4c.06048"]]},{"id":"c131f134.027278","type":"debug","z":"8bdea88.abe9658","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":710,"y":280,"wires":[]},{"id":"45de362b.566a","type":"signalk-geofence-switch","z":"8bdea88.abe9658","name":"","context":"vessels.self","period":10000,"myposition":false,"lat":"39.063125","lon":"-76.4872533333333","distance":10,"x":260,"y":220,"wires":[["9954903e.c3801"],["ca4ac3ec.4bba3"]]},{"id":"9954903e.c3801","type":"debug","z":"8bdea88.abe9658","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":560,"y":240,"wires":[]},{"id":"aef0ca4c.06048","type":"rbe","z":"8bdea88.abe9658","name":"block unless changed","func":"rbei","gap":"","start":"","inout":"out","property":"payload","x":320,"y":460,"wires":[["343ef262.95945e"]]},{"id":"343ef262.95945e","type":"switch","z":"8bdea88.abe9658","name":"","property":"payload","propertyType":"msg","rules":[{"t":"eq","v":"outside","vt":"str"},{"t":"eq","v":"inside","vt":"str"}],"checkall":"true","repair":false,"outputs":2,"x":370,"y":560,"wires":[["ec735054.a2362"],["916b417.377c4c"]],"outputLabels":["outside","inside"]},{"id":"c97f4062.dd2498","type":"twitter out","z":"8bdea88.abe9658","twitter":"","name":"Tweet","x":770,"y":560,"wires":[]},{"id":"ec735054.a2362","type":"change","z":"8bdea88.abe9658","name":"I'm heading out to sea!!","rules":[{"t":"set","p":"payload","pt":"msg","to":"I'm heading out to sea!!","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":570,"y":520,"wires":[["c97f4062.dd2498"]]},{"id":"916b417.377c4c","type":"change","z":"8bdea88.abe9658","name":"I'm back at the slip :(","rules":[{"t":"set","p":"payload","pt":"msg","to":"I'm back at the slip :(","tot":"str"}],"action":"","property":"","from":"","to":"","reg":false,"x":560,"y":600,"wires":[["c97f4062.dd2498"]]}]
+[
+   {
+      "disabled" : false,
+      "label" : "Flow 1",
+      "info" : "",
+      "id" : "8bdea88.abe9658",
+      "type" : "tab"
+   },
+   {
+      "wires" : [
+         [
+            "e1a68487.819c28"
+         ]
+      ],
+      "type" : "change",
+      "property" : "",
+      "y" : 60,
+      "to" : "",
+      "from" : "",
+      "name" : "Add 1.0",
+      "rules" : [
+         {
+            "to" : "payload +  1.0",
+            "t" : "set",
+            "tot" : "jsonata",
+            "p" : "payload",
+            "pt" : "msg"
+         }
+      ],
+      "action" : "",
+      "id" : "ca4ac3ec.4bba3",
+      "z" : "8bdea88.abe9658",
+      "x" : 420,
+      "reg" : false
+   },
+   {
+      "source" : "",
+      "type" : "signalk-send-pathvalue",
+      "wires" : [],
+      "y" : 60,
+      "name" : "",
+      "x" : 630,
+      "z" : "8bdea88.abe9658",
+      "id" : "e1a68487.819c28"
+   },
+   {
+      "id" : "298fb1f.153a74e",
+      "z" : "8bdea88.abe9658",
+      "period" : 1000,
+      "x" : 170,
+      "name" : "environment.depth.belowSurface",
+      "context" : "vessels.self",
+      "y" : 60,
+      "path" : "environment.depth.belowSurface",
+      "type" : "signalk-subscribe",
+      "wires" : [
+         [
+            "45de362b.566a"
+         ]
+      ],
+      "flatten" : true
+   },
+   {
+      "context" : "vessels.self",
+      "name" : "",
+      "y" : 460,
+      "myposition" : false,
+      "lon" : "-77.4872533333333",
+      "id" : "99b572f6.2f8c2",
+      "z" : "8bdea88.abe9658",
+      "period" : "1000",
+      "x" : 100,
+      "distance" : "15",
+      "lat" : "39.063125",
+      "wires" : [
+         [],
+         [],
+         [
+            "aef0ca4c.06048"
+         ]
+      ],
+      "type" : "signalk-geofence"
+   },
+   {
+      "tosidebar" : true,
+      "console" : false,
+      "wires" : [],
+      "type" : "debug",
+      "complete" : "false",
+      "name" : "",
+      "y" : 280,
+      "id" : "c131f134.027278",
+      "tostatus" : false,
+      "z" : "8bdea88.abe9658",
+      "active" : true,
+      "x" : 710
+   },
+   {
+      "distance" : 10,
+      "lat" : "39.063125",
+      "type" : "signalk-geofence-switch",
+      "wires" : [
+         [
+            "9954903e.c3801"
+         ],
+         [
+            "ca4ac3ec.4bba3"
+         ]
+      ],
+      "y" : 220,
+      "name" : "",
+      "context" : "vessels.self",
+      "myposition" : false,
+      "id" : "45de362b.566a",
+      "z" : "8bdea88.abe9658",
+      "lon" : "-76.4872533333333",
+      "x" : 260,
+      "period" : 10000
+   },
+   {
+      "name" : "",
+      "y" : 240,
+      "tostatus" : false,
+      "z" : "8bdea88.abe9658",
+      "id" : "9954903e.c3801",
+      "active" : true,
+      "x" : 560,
+      "tosidebar" : true,
+      "console" : false,
+      "complete" : "false",
+      "wires" : [],
+      "type" : "debug"
+   },
+   {
+      "func" : "rbei",
+      "type" : "rbe",
+      "wires" : [
+         [
+            "343ef262.95945e"
+         ]
+      ],
+      "property" : "payload",
+      "gap" : "",
+      "start" : "",
+      "inout" : "out",
+      "z" : "8bdea88.abe9658",
+      "id" : "aef0ca4c.06048",
+      "x" : 320,
+      "y" : 460,
+      "name" : "block unless changed"
+   },
+   {
+      "repair" : false,
+      "checkall" : "true",
+      "name" : "",
+      "rules" : [
+         {
+            "vt" : "str",
+            "v" : "outside",
+            "t" : "eq"
+         },
+         {
+            "vt" : "str",
+            "v" : "inside",
+            "t" : "eq"
+         }
+      ],
+      "y" : 560,
+      "x" : 370,
+      "outputs" : 2,
+      "z" : "8bdea88.abe9658",
+      "id" : "343ef262.95945e",
+      "propertyType" : "msg",
+      "outputLabels" : [
+         "outside",
+         "inside"
+      ],
+      "type" : "switch",
+      "wires" : [
+         [
+            "ec735054.a2362"
+         ],
+         [
+            "916b417.377c4c"
+         ]
+      ],
+      "property" : "payload"
+   },
+   {
+      "twitter" : "",
+      "wires" : [],
+      "type" : "twitter out",
+      "name" : "Tweet",
+      "y" : 560,
+      "x" : 770,
+      "id" : "c97f4062.dd2498",
+      "z" : "8bdea88.abe9658"
+   },
+   {
+      "property" : "",
+      "wires" : [
+         [
+            "c97f4062.dd2498"
+         ]
+      ],
+      "type" : "change",
+      "x" : 570,
+      "reg" : false,
+      "z" : "8bdea88.abe9658",
+      "action" : "",
+      "id" : "ec735054.a2362",
+      "from" : "",
+      "name" : "I'm heading out to sea!!",
+      "rules" : [
+         {
+            "to" : "I'm heading out to sea!!",
+            "pt" : "msg",
+            "p" : "payload",
+            "t" : "set",
+            "tot" : "str"
+         }
+      ],
+      "to" : "",
+      "y" : 520
+   },
+   {
+      "x" : 560,
+      "reg" : false,
+      "id" : "916b417.377c4c",
+      "action" : "",
+      "z" : "8bdea88.abe9658",
+      "from" : "",
+      "rules" : [
+         {
+            "to" : "I'm back at the slip :(",
+            "pt" : "msg",
+            "p" : "payload",
+            "t" : "set",
+            "tot" : "str"
+         }
+      ],
+      "name" : "I'm back at the slip :(",
+      "y" : 600,
+      "to" : "",
+      "property" : "",
+      "wires" : [
+         [
+            "c97f4062.dd2498"
+         ]
+      ],
+      "type" : "change"
+   }
+]

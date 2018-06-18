@@ -1,1 +1,283 @@
-[{"id":"bcd7c76a.b16a7","type":"subflow","name":"at slip?","info":"","in":[{"x":60,"y":80,"wires":[{"id":"bf97f057.6c6908"}]}],"out":[{"x":420,"y":60,"wires":[{"id":"bf97f057.6c6908","port":0}]},{"x":420,"y":120,"wires":[{"id":"bf97f057.6c6908","port":1}]}],"outputLabels":["yes","no"]},{"id":"bf97f057.6c6908","type":"function","z":"bcd7c76a.b16a7","name":"is at slip","func":"\n\n\nlet geodist = global.get('geodist')\nlet app = global.get('app')\n\nlet slipLocation = { \n    lat : 39.063125,\n    lon: -76.4872533333333\n}\n\nlet pos = app.getSelfPath('navigation.position.value')\n\nif ( pos ) {\n    let distanceFromSlip = geodist(slipLocation, \n      {lat: pos.latitude, lon: pos.longitude}, { units: 'feet'})\n    if ( distanceFromSlip > 50 ) {\n        return [null, msg];\n    } else {\n        return [msg, null];\n    }\n}\n\n","outputs":2,"noerr":0,"x":220,"y":80,"wires":[[],[]],"outputLabels":["yes","no"]},{"id":"9d05e907.a5601","type":"tab","label":"AC Voltage Alarm","disabled":false,"info":""},{"id":"b446df4c.06ef4","type":"switch","z":"9d05e907.a5601","name":"Voltage Low?","property":"payload","propertyType":"msg","rules":[{"t":"lt","v":"100","vt":"str"},{"t":"gte","v":"100","vt":"str"}],"checkall":"true","repair":false,"outputs":2,"x":460,"y":120,"wires":[["9fe1404a.8ce8d8"],["e515e21.ad267a"]],"outputLabels":["yes","no"]},{"id":"e515e21.ad267a","type":"signalk-send-notification","z":"9d05e907.a5601","name":"Clear AC in Alarm","path":"electrical.inverters.261.acin.voltage","state":"normal","message":"There is now power at dock 1","visual":true,"sound":true,"x":670,"y":160,"wires":[]},{"id":"fda6c8f0.eebfc","type":"subflow:bcd7c76a.b16a7","z":"9d05e907.a5601","name":"","x":270,"y":120,"wires":[["b446df4c.06ef4"],[]]},{"id":"9fe1404a.8ce8d8","type":"signalk-send-notification","z":"9d05e907.a5601","name":"Send AC in Alarm","path":"electrical.inverters.261.acin.voltage","state":"alarm","message":"The power at dock 1 is OUT!","visual":true,"sound":true,"x":670,"y":80,"wires":[]},{"id":"6b49ee9b.611ce","type":"e-mail","z":"9d05e907.a5601","server":"smtp.gmail.com","port":"465","secure":true,"name":"scott@scottbender.net","dname":"","x":740,"y":620,"wires":[]},{"id":"91b33042.b176c8","type":"rbe","z":"9d05e907.a5601","name":"if changed","func":"rbei","gap":"","start":"","inout":"out","property":"payload","x":530,"y":540,"wires":[["6b49ee9b.611ce"]]},{"id":"8407584d.56fce8","type":"signalk-subscribe","z":"9d05e907.a5601","name":"AC In Voltage","flatten":true,"context":"vessels.self","path":"electrical.inverters.261.acin.voltage","period":"30000","x":90,"y":120,"wires":[["fda6c8f0.eebfc"]]},{"id":"8943665a.622d2","type":"inject","z":"9d05e907.a5601","name":"","topic":"","payload":"0","payloadType":"num","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":90,"y":720,"wires":[[]]},{"id":"53aa7a57.92450c","type":"inject","z":"9d05e907.a5601","name":"","topic":"","payload":"120","payloadType":"num","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":90,"y":660,"wires":[[]]},{"id":"998e58da.0499b","type":"signalk-notification","z":"9d05e907.a5601","name":"","notification":"electrical.inverters.261.acin.voltage","state":"any","x":110,"y":540,"wires":[["4344f958.8d3a4"]]},{"id":"4344f958.8d3a4","type":"change","z":"9d05e907.a5601","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"msg.payload.value.message","tot":"jsonata"},{"t":"set","p":"topic","pt":"msg","to":"msg.payload.value.message","tot":"jsonata"}],"action":"","property":"","from":"","to":"","reg":false,"x":320,"y":540,"wires":[["91b33042.b176c8"]]}]
+[
+   {
+      "outputLabels" : [
+         "yes",
+         "no"
+      ],
+      "name" : "at slip?",
+      "out" : [
+         {
+            "y" : 60,
+            "wires" : [
+               {
+                  "id" : "bf97f057.6c6908",
+                  "port" : 0
+               }
+            ],
+            "x" : 420
+         },
+         {
+            "x" : 420,
+            "y" : 120,
+            "wires" : [
+               {
+                  "id" : "bf97f057.6c6908",
+                  "port" : 1
+               }
+            ]
+         }
+      ],
+      "in" : [
+         {
+            "y" : 80,
+            "wires" : [
+               {
+                  "id" : "bf97f057.6c6908"
+               }
+            ],
+            "x" : 60
+         }
+      ],
+      "type" : "subflow",
+      "id" : "bcd7c76a.b16a7",
+      "info" : ""
+   },
+   {
+      "id" : "bf97f057.6c6908",
+      "wires" : [
+         [],
+         []
+      ],
+      "outputs" : 2,
+      "y" : 80,
+      "x" : 220,
+      "z" : "bcd7c76a.b16a7",
+      "func" : "\n\n\nlet geodist = global.get('geodist')\nlet app = global.get('app')\n\nlet slipLocation = { \n    lat : 39.063125,\n    lon: -76.4872533333333\n}\n\nlet pos = app.getSelfPath('navigation.position.value')\n\nif ( pos ) {\n    let distanceFromSlip = geodist(slipLocation, \n      {lat: pos.latitude, lon: pos.longitude}, { units: 'feet'})\n    if ( distanceFromSlip > 50 ) {\n        return [null, msg];\n    } else {\n        return [msg, null];\n    }\n}\n\n",
+      "type" : "function",
+      "name" : "is at slip",
+      "noerr" : 0,
+      "outputLabels" : [
+         "yes",
+         "no"
+      ]
+   },
+   {
+      "id" : "9d05e907.a5601",
+      "info" : "",
+      "disabled" : false,
+      "label" : "AC Voltage Alarm",
+      "type" : "tab"
+   },
+   {
+      "x" : 460,
+      "rules" : [
+         {
+            "v" : "100",
+            "t" : "lt",
+            "vt" : "str"
+         },
+         {
+            "t" : "gte",
+            "v" : "100",
+            "vt" : "str"
+         }
+      ],
+      "propertyType" : "msg",
+      "checkall" : "true",
+      "z" : "9d05e907.a5601",
+      "type" : "switch",
+      "property" : "payload",
+      "name" : "Voltage Low?",
+      "outputLabels" : [
+         "yes",
+         "no"
+      ],
+      "id" : "b446df4c.06ef4",
+      "repair" : false,
+      "wires" : [
+         [
+            "9fe1404a.8ce8d8"
+         ],
+         [
+            "e515e21.ad267a"
+         ]
+      ],
+      "outputs" : 2,
+      "y" : 120
+   },
+   {
+      "name" : "Clear AC in Alarm",
+      "type" : "signalk-send-notification",
+      "sound" : true,
+      "x" : 670,
+      "message" : "There is now power at dock 1",
+      "z" : "9d05e907.a5601",
+      "visual" : true,
+      "y" : 160,
+      "wires" : [],
+      "path" : "electrical.inverters.261.acin.voltage",
+      "state" : "normal",
+      "id" : "e515e21.ad267a"
+   },
+   {
+      "x" : 270,
+      "id" : "fda6c8f0.eebfc",
+      "z" : "9d05e907.a5601",
+      "type" : "subflow:bcd7c76a.b16a7",
+      "name" : "",
+      "wires" : [
+         [
+            "b446df4c.06ef4"
+         ],
+         []
+      ],
+      "y" : 120
+   },
+   {
+      "x" : 670,
+      "visual" : true,
+      "z" : "9d05e907.a5601",
+      "message" : "The power at dock 1 is OUT!",
+      "type" : "signalk-send-notification",
+      "name" : "Send AC in Alarm",
+      "sound" : true,
+      "state" : "alarm",
+      "id" : "9fe1404a.8ce8d8",
+      "path" : "electrical.inverters.261.acin.voltage",
+      "wires" : [],
+      "y" : 80
+   },
+   {
+      "type" : "e-mail",
+      "name" : "scott@scottbender.net",
+      "secure" : true,
+      "port" : "465",
+      "x" : 740,
+      "z" : "9d05e907.a5601",
+      "server" : "smtp.gmail.com",
+      "wires" : [],
+      "y" : 620,
+      "id" : "6b49ee9b.611ce",
+      "dname" : ""
+   },
+   {
+      "type" : "rbe",
+      "name" : "if changed",
+      "property" : "payload",
+      "start" : "",
+      "x" : 530,
+      "inout" : "out",
+      "z" : "9d05e907.a5601",
+      "func" : "rbei",
+      "gap" : "",
+      "wires" : [
+         [
+            "6b49ee9b.611ce"
+         ]
+      ],
+      "y" : 540,
+      "id" : "91b33042.b176c8"
+   },
+   {
+      "wires" : [
+         [
+            "fda6c8f0.eebfc"
+         ]
+      ],
+      "y" : 120,
+      "flatten" : true,
+      "id" : "8407584d.56fce8",
+      "path" : "electrical.inverters.261.acin.voltage",
+      "type" : "signalk-subscribe",
+      "name" : "AC In Voltage",
+      "period" : "30000",
+      "z" : "9d05e907.a5601",
+      "context" : "vessels.self",
+      "x" : 90
+   },
+   {
+      "once" : false,
+      "id" : "8943665a.622d2",
+      "payloadType" : "num",
+      "repeat" : "",
+      "wires" : [
+         []
+      ],
+      "crontab" : "",
+      "y" : 720,
+      "x" : 90,
+      "onceDelay" : 0.1,
+      "topic" : "",
+      "z" : "9d05e907.a5601",
+      "payload" : "0",
+      "type" : "inject",
+      "name" : ""
+   },
+   {
+      "onceDelay" : 0.1,
+      "x" : 90,
+      "z" : "9d05e907.a5601",
+      "topic" : "",
+      "name" : "",
+      "type" : "inject",
+      "payload" : "120",
+      "once" : false,
+      "id" : "53aa7a57.92450c",
+      "payloadType" : "num",
+      "repeat" : "",
+      "y" : 660,
+      "crontab" : "",
+      "wires" : [
+         []
+      ]
+   },
+   {
+      "name" : "",
+      "type" : "signalk-notification",
+      "z" : "9d05e907.a5601",
+      "x" : 110,
+      "y" : 540,
+      "wires" : [
+         [
+            "4344f958.8d3a4"
+         ]
+      ],
+      "notification" : "electrical.inverters.261.acin.voltage",
+      "state" : "any",
+      "id" : "998e58da.0499b"
+   },
+   {
+      "wires" : [
+         [
+            "91b33042.b176c8"
+         ]
+      ],
+      "y" : 540,
+      "from" : "",
+      "action" : "",
+      "to" : "",
+      "id" : "4344f958.8d3a4",
+      "type" : "change",
+      "reg" : false,
+      "name" : "",
+      "property" : "",
+      "z" : "9d05e907.a5601",
+      "rules" : [
+         {
+            "pt" : "msg",
+            "to" : "msg.payload.value.message",
+            "t" : "set",
+            "p" : "payload",
+            "tot" : "jsonata"
+         },
+         {
+            "to" : "msg.payload.value.message",
+            "pt" : "msg",
+            "tot" : "jsonata",
+            "p" : "topic",
+            "t" : "set"
+         }
+      ],
+      "x" : 320
+   }
+]
