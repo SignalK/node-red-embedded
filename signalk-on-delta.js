@@ -7,6 +7,18 @@ module.exports = function(RED) {
     var signalk = node.context().global.get('signalk')
     var app = node.context().global.get('app')
 
+    let showingStatus = false
+    function showStatus() {
+      if ( ! showingStatus ) {
+        node.status({fill:"green",shape:"dot",text:"sending"});
+        showingStatus = true;
+        setTimeout( () => {
+          node.status({});
+          showingStatus = false
+        }, 1000)
+      }
+    }
+
     function on_delta(delta) {
       if ( delta.updates ) {
         if ( delta.context === config.context ||
@@ -23,6 +35,7 @@ module.exports = function(RED) {
             })
             
             if ( copy.updates.length > 0 ) {
+              showStatus()
               if ( copy.context == app.selfContext ) {
                 copy.context = 'vessels.self'
               }
@@ -32,6 +45,7 @@ module.exports = function(RED) {
             delta.updates.forEach(update => {
               if ( update.values &&
                    (!update.$source || !update.$source.startsWith('signalk-node-red') )) {
+                showStatus()
                 update.values.forEach(pathValue => {
                   node.send({
                     $source: update.$source,

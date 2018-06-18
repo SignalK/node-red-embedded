@@ -6,8 +6,16 @@ module.exports = function(RED) {
 
     var app = node.context().global.get('app')
     var source = config.name ? 'node-red-' + config.name : 'node-red'
+
+    function showStatus(text) {
+      node.status({fill:"green",shape:"dot",text:text});
+    }
     
     node.on('input', msg => {
+      if ( !msg.topic ) {
+        node.error('no topic for incomming message')
+        return
+      }
       let delta = {
         updates: [
           {
@@ -23,6 +31,8 @@ module.exports = function(RED) {
       if ( config.source && config.source.length > 0 ) {
         delta.updates[0].$source = config.source
       }
+      let c = msg.topic.lastIndexOf('.')
+      showStatus(`${msg.topic.substring(c+1)}: ${msg.payload}`)
       app.handleMessage(source, delta)
     })
   }

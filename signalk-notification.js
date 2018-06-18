@@ -4,10 +4,22 @@ module.exports = function(RED) {
     RED.nodes.createNode(this,config);
     var node = this;
     var unsubscribes = []
+
+    let showingStatus = false
+    function showStatus() {
+      if ( ! showingStatus ) {
+        node.status({fill:"green",shape:"dot",text:"sending"});
+        showingStatus = true;
+        setTimeout( () => {
+          node.status({});
+          showingStatus = false
+        }, 1000)
+      }
+    }
     
     var subscriptionmanager = node.context().global.get('subscriptionmanager')
 
-    var path = config.notification === 'any' ? 'notifications.*' : 'notifications.' + config.notification
+    var path = config.notification === 'any' || config.notification.length === 0 ? 'notifications.*' : 'notifications.' + config.notification
 
     var command = {
       context: "vessels.self",
@@ -23,6 +35,7 @@ module.exports = function(RED) {
       let notification = delta.updates[0].values[0]
 
       if ( config.state === 'any' || (notification.value && notification.value.state == config.state) ) {
+        showStatus()
         node.send({ payload: notification})
       }
     })

@@ -7,8 +7,21 @@ module.exports = function(RED) {
 
     let app = node.context().global.get('app')
     let _ = node.context().global.get('lodash')
+
+    let showingStatus = false
+    function showStatus() {
+      if ( ! showingStatus ) {
+        node.status({fill:"green",shape:"dot",text:"sending"});
+        showingStatus = true;
+        setTimeout( () => {
+          node.status({});
+          showingStatus = false
+        }, 1000)
+      }
+    }
     
     node.on('input', msg => {
+      showStatus()
       if ( _.isObject(msg.payload) ) {
         app.emit(config.nmea2000JsonEvent, msg.payload)
       } else {

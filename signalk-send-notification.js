@@ -6,6 +6,18 @@ module.exports = function(RED) {
 
     var app = node.context().global.get('app')
     const _ = node.context().global.get('lodash')
+
+    let showingStatus = false
+    function showStatus(text) {
+      if ( ! showingStatus ) {
+        node.status({fill:"green",shape:"dot",text:text});
+        showingStatus = true;
+        setTimeout( () => {
+          node.status({});
+          showingStatus = false
+        }, 1000)
+      }
+    }
     
     node.on('input', msg => {
       let info = _.isObject(msg.payload) ? msg.payload : null
@@ -42,7 +54,9 @@ module.exports = function(RED) {
           }
         ]
       }
+      showStatus(state)
       app.handleMessage('signalk-node-red', delta)
+      //node.send({payload: delta})
     })
   }
   RED.nodes.registerType("signalk-send-notification", signalKSendNotification);
