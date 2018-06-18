@@ -19,7 +19,9 @@
       "signalk-send-put": "signalk-send-put.js",
       "signalk-send-notification": "signalk-send-notification.js",
       "signalk-send-nmea2000": "signalk-send-nmea2000.js",
-      "signalk-send-nmea0183": "signalk-send-nmea0183.js"
+      "signalk-send-nmea0183": "signalk-send-nmea0183.js",
+      "signalk-geofence": "signalk-geofence.js",
+      "signalk-geofence-switch": "signalk-geofence-switch.js"
     }
   }
 }

@@ -1,0 +1,70 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-geofence',{
+    category: 'input',
+    color: '#ffcc01',
+    defaults: {
+      name: {value:""},
+      context: {value: "vessels.self"},
+      period: {value: 10000},
+      myposition: { value: false },
+      lat: {value: 0},
+      lon: {value: 0},
+      distance: { value: 10 }
+    },
+    inputs:0,
+    outputs:3,
+    outputLabels: [ 'inside fence', 'outside fence', 'either' ],
+    icon: "bridge.png",
+    label: function() {
+      return this.name||"signalk-geofence";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-geofence">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-context"><i class="icon-tag"></i> Context</label>
+        <input type="text" id="node-input-context" placeholder="Context">
+  </div>
+  <div class="form-row">
+  <label for="node-input-period"><i class="icon-tag"></i> Period (ms)</label>
+        <input type="text" id="node-input-period" placeholder="Period">
+  </div>
+  <div class="form-row">
+        <label for="node-input-myposition"><i class="icon-tag"></i> Use My Position</label>
+        <input type="checkbox" id="node-input-myposition" placeholder="Use My Position">
+  </div>
+  <div class="form-row">
+        <label for="node-input-lat"><i class="icon-tag"></i> Latitude</label>
+        <input type="text" id="node-input-lat" placeholder="Latitude">
+  </div>
+  <div class="form-row">
+        <label for="node-input-lon"><i class="icon-tag"></i> Longitude</label>
+        <input type="text" id="node-input-lon" placeholder="Longitude">
+  </div>
+  <div class="form-row">
+  <label for="node-input-distance"><i class="icon-tag"></i> Distance (m)</label>
+        <input type="text" id="node-input-distance" placeholder="Distance">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-geofence">
+  <p>Input that checks if a vessel is inside of the specified geofence</p>
+
+<h3>Outputs</h3>
+  <dl class="message-properties">
+    <dt>payload</dt>
+    <dd>Contains 'inside' or 'outside'</dd>
+  </dl>
+  <h3>Details</h3>
+  <p><code>Period</code> specifies how often to check the position</p>
+  <p><code>Use My Position</code> If checked, the Latitude and Longitude setting is ignored and instead the vessel.self position is used. Use this if specifying the context of another vessel and you want the fence to be around the other vessel. It will then fire 'inside' when you're near that vessel.</p>
+
+  <p><code>Latitude and Longitude</code> specifies the center of the geofence</p>
+  <p><code>Distance</code> The radius of te geofence in meters.
+</code></pre>
+</script>
