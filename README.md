@@ -17,7 +17,7 @@ See the examples folder for some sample usage.
 ## Send an alarm when the AC input voltage is low and the boat is in its slip
 ![Alt text](screens/ac-in-voltage-alarm.jpeg)
 
-## Send a tween when leaving or arriving at the slip
+## Send a tweet when leaving or arriving at the slip
 ![Alt text](screens/tweet-when-leaving.jpeg)
 
 
