@@ -43,6 +43,10 @@ The output payload will be the value and the topic will be the path, The payload
 }
 ```
 
+## signalk-geofence-switch
+
+Function that checks if a vessel is inside of the specified geofence
+
 ## signalk-send-pathvalue
 
 Output that sends a delta through the server. Input should be path and value
