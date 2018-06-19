@@ -7,7 +7,13 @@ module.exports = function(RED) {
     var app = node.context().global.get('app')
     
     node.on('input', msg => {
-      app.putSelfPath(config.path, msg.payload)
+      try {
+        app.putSelfPath(config.path, msg.payload)
+      } catch (err) {
+        node.error(err)
+        console.error(err.stack);
+      }
+      
       node.status({fill:"green",shape:"dot",text:`value: ${msg.payload}`});
     })
   }
