@@ -4,10 +4,15 @@
   "description": "Node red nodes for use with the signalk-node-red plugin",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "changelog": "github-changes -o signalk -r node-red-embedded -a --only-pulls --use-commit-body --data=pulls  --tag-name=v$npm_package_version",
+    "release": "git tag -d v$npm_package_version; npm run changelog && git add CHANGELOG.md && git commit -m 'chore: update changelog' && git tag v$npm_package_version && git push --tags && git push"
   },
   "author": "Scott Bender",
   "license": "Apache-2.0",
+  "devDependencies": {
+    "github-changes": "^1.1.2"
+  },
   "node-red": {
     "nodes": {
       "signalk-subscribe": "signalk-subscribe.js",
