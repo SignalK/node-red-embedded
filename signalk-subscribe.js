@@ -23,9 +23,9 @@ module.exports = function(RED) {
     }
 
     let showingStatus = false
-    function showStatus() {
+    function showStatus(value) {
       if ( ! showingStatus ) {
-        node.status({fill:"green",shape:"dot",text:"sending"});
+        node.status({fill:"green",shape:"dot",text: value != null ? `sending ${value}` : "sending"});
         showingStatus = true;
         setTimeout( () => {
           node.status({});
@@ -47,7 +47,7 @@ module.exports = function(RED) {
           })
           
           if ( copy.updates.length > 0 ) {
-            showStatus()
+            showStatus(null)
             if ( copy.context == app.selfContext ) {
               copy.context = 'vessels.self'
             }
@@ -57,8 +57,8 @@ module.exports = function(RED) {
           delta.updates.forEach(update => {
             if ( update.values &&
                  (!update.$source || !update.$source.startsWith('signalk-node-red') ) && ((!config.source || config.source.length === 0) || update.$source == config.source) ) {
-              showStatus()
               update.values.forEach(pathValue => {
+                showStatus(pathValue.value)
                 node.send({
                   $source: update.$source,
                   source: update.source,
