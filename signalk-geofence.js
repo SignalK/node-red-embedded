@@ -15,7 +15,9 @@ module.exports = function(RED) {
         period: config.period
       }]
     }
-    
+
+    //wait a second because the node is not yet wired up
+    setTimeout(() => {
     subscriptionmanager.subscribe(command, unsubscribes, error => {
       node.error('subscription error: ' + error)
     }, delta => {
@@ -41,15 +43,30 @@ module.exports = function(RED) {
         let dist = geodist(fencePos, 
                            {lat: pos.latitude, lon: pos.longitude},
                            { unit: 'meters'})
+        let status
+        let payload
         if ( dist > config.distance ) {
-          node.status({fill:"green",shape:"dot",text:"outside fence"});
-          node.send([null, { payload: 'outside' }, { payload: 'outside' }]);
+          status = {fill:"green",shape:"dot",text:"outside fence"}
+          payload = [null, { payload: 'outside' }, { payload: 'outside' }]
         } else {
-          node.status({fill:"green",shape:"dot",text:"inside fence"});
-          node.send([{ payload: 'inside' }, null, { payload: 'inside' }]);
+          status = {fill:"green",shape:"dot",text:"inside fence"}
+          payload = [{ payload: 'inside' }, null, { payload: 'inside' }]
         }
+
+        let last = node.context().get('lastValue')
+        let current = payload[2].payload
+        //console.log(`${last} ${current} ${config.mode}`)
+        if ( !last && config.mode === 'sendChangesIgnore' ) {
+          return
+        } else if ( !config.mode || config.mode === 'sendAll' || !last
+                    || (config.mode === 'sendChanges' && last != current) ) {
+          node.context().set('lastValue', current)
+          node.status(status);
+          node.send(payload)
+        } 
       }
     })
+    }, 1000)
 
     node.on('close', function() {
       unsubscribes.forEach(function(func) { func() })

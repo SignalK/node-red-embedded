@@ -4,6 +4,7 @@
     color: '#ffcc01',
     defaults: {
       name: {value:""},
+      mode: {value:"sendAll"},
       context: {value: "vessels.self"},
       period: {value: 10000},
       myposition: { value: false },
@@ -25,6 +26,14 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+  <label for="node-input-mode"><i class="icon-tag"></i> Mode</label>
+  <select id="node-input-mode" placeholder="Mode">
+    <option value="sendAll">send all</option>
+    <option value="sendChanges">send changes</option>
+  <option value="sendChangesIgnore">send changes (ingoring initial value)</option>
+  </select>
   </div>
   <div class="form-row">
         <label for="node-input-context"><i class="icon-tag"></i> Context</label>
