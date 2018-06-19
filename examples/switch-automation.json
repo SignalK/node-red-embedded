@@ -1,82 +1,153 @@
 [
    {
       "disabled" : false,
-      "label" : "Flow 1",
-      "type" : "tab",
+      "label" : "Switches",
       "info" : "",
-      "id" : "cf96057a.038f88"
+      "id" : "cf96057a.038f88",
+      "type" : "tab"
    },
    {
-      "payload" : "",
-      "repeat" : "5",
-      "y" : 120,
-      "type" : "inject",
-      "name" : "Trigger Poll",
-      "crontab" : "",
-      "z" : "cf96057a.038f88",
-      "id" : "4f82f0b0.ea4f5",
       "once" : false,
+      "payloadType" : "date",
+      "id" : "4f82f0b0.ea4f5",
+      "x" : 110,
       "onceDelay" : 0.1,
+      "name" : "trigger poll",
       "wires" : [
          [
-            "f3cc3b94.c5e49",
-            "235e9b3d.b4f944"
+            "235e9b3d.b4f944",
+            "d991232d.ef7938"
          ]
       ],
-      "payloadType" : "date",
+      "payload" : "",
+      "crontab" : "",
+      "type" : "inject",
+      "z" : "cf96057a.038f88",
       "topic" : "",
-      "x" : 110
+      "y" : 120,
+      "repeat" : "5"
    },
    {
-      "x" : 340,
+      "outputs" : 1,
+      "z" : "cf96057a.038f88",
+      "func" : "\n\nlet _ = global.get('lodash')\nlet app = global.get('app')\n\nlet sog = app.getSelfPath('navigation.speedOverGround.value')\nlet rpm = app.getSelfPath('propulsion.port.revolutions.value')\nlet sun = app.getSelfPath('environment.sun.value')\nlet acVoltage = app.getSelfPath('electrical.inverters.261.acin.voltage.value')\nlet state = app.getSelfPath('electrical.switches.venus-1.state.value')\n\nlet res = false\nif ( !_.isUndefined(acVoltage) && !_.isUndefined(sog) &&  !_.isUndefined(sun) ) {\n    res = (_.isUndefined(rpm) || rpm === 0) && sog < 0.5 && sun !== 'day' && acVoltage === 0\n    //res = 1\n}\n\nif ( res === false ) {\n    node.status({fill:\"red\",shape:\"ring\",text:\"off\"});\n} else {\n    node.status({fill:\"green\",shape:\"dot\",text:\"on\"});\n}\n\nif ( state != res ) {\n    return {payload: res ? 1 : 0 }\n}",
+      "y" : 120,
+      "wires" : [
+         [
+            "8cd816d5.e67028"
+         ]
+      ],
+      "noerr" : 0,
+      "type" : "function",
+      "name" : "check anchor light",
+      "x" : 490,
+      "id" : "f3cc3b94.c5e49"
+   },
+   {
+      "id" : "8cd816d5.e67028",
+      "name" : "anchor light",
+      "x" : 690,
+      "wires" : [],
+      "path" : "electrical.switches.venus-1.state",
+      "type" : "signalk-send-put",
+      "z" : "cf96057a.038f88",
+      "y" : 120
+   },
+   {
+      "y" : 180,
+      "func" : "\nlet _ = global.get('lodash')\nlet app = global.get('app')\n\nlet mode = app.getSelfPath('electrical.chargers.261.chargingMode.value')\nlet rpm = app.getSelfPath('propulsion.port.revolutions.value')\nlet state = app.getSelfPath('electrical.switches.venus-0.state.value')\n\nlet res = false\nif ( !_.isUndefined(mode) && !_.isUndefined(rpm) ) {\n    res = (mode === 'off' || mode === 'inverting') && rpm > 0\n}\n\nif ( res === false ) {\n    node.status({fill:\"red\",shape:\"ring\",text:\"off\"});\n} else {\n    node.status({fill:\"green\",shape:\"dot\",text:\"on\"});\n}\n\nif ( state != res ) {\n    return {payload: res ? 1 : 0 }\n}",
+      "outputs" : 1,
+      "z" : "cf96057a.038f88",
+      "type" : "function",
+      "noerr" : 0,
+      "wires" : [
+         [
+            "222ecb4.3b9b634"
+         ]
+      ],
+      "x" : 460,
+      "name" : "check acr",
+      "id" : "235e9b3d.b4f944"
+   },
+   {
+      "z" : "cf96057a.038f88",
+      "y" : 180,
+      "path" : "electrical.switches.venus-0.state",
+      "wires" : [],
+      "type" : "signalk-send-put",
+      "x" : 670,
+      "name" : "acr",
+      "id" : "222ecb4.3b9b634"
+   },
+   {
+      "wires" : [
+         [
+            "c7feddf8.8abed"
+         ]
+      ],
+      "type" : "change",
+      "from" : "",
+      "to" : "",
+      "z" : "cf96057a.038f88",
+      "y" : 40,
+      "reg" : false,
+      "rules" : [
+         {
+            "p" : "payload",
+            "to" : "0",
+            "pt" : "msg",
+            "t" : "set",
+            "tot" : "num"
+         }
+      ],
+      "id" : "b1355a1c.6b9e",
+      "action" : "",
+      "name" : "turn off",
+      "x" : 460,
+      "property" : ""
+   },
+   {
+      "id" : "d991232d.ef7938",
+      "myposition" : false,
+      "x" : 300,
+      "name" : "at slip?",
+      "lat" : "39.063125",
+      "lon" : "-76.4872533333333",
+      "distance" : "15.24",
+      "type" : "signalk-geofence-switch",
+      "context" : "vessels.self",
+      "wires" : [
+         [
+            "b1355a1c.6b9e"
+         ],
+         [
+            "f3cc3b94.c5e49"
+         ]
+      ],
+      "y" : 80,
+      "z" : "cf96057a.038f88"
+   },
+   {
+      "y" : 40,
+      "timeoutUnits" : "seconds",
+      "rateUnits" : "second",
+      "nbRateUnits" : "60",
+      "id" : "c7feddf8.8abed",
+      "randomUnits" : "seconds",
+      "randomLast" : "5",
+      "randomFirst" : "1",
       "z" : "cf96057a.038f88",
       "wires" : [
          [
             "8cd816d5.e67028"
          ]
       ],
-      "id" : "f3cc3b94.c5e49",
-      "noerr" : 0,
-      "func" : "\n\nlet _ = global.get('lodash')\nlet app = global.get('app')\n\nlet sog = app.getSelfPath('navigation.speedOverGround.value')\nlet acVoltage = app.getSelfPath('electrical.inverters.261.acin.voltage.value')\nlet rpm = app.getSelfPath('propulsion.port.revolutions.value')\nlet sun = app.getSelfPath('environment.sun.value')\nlet state = app.getSelfPath('electrical.switches.venus-1.state.value')\n\nlet res = false\nif ( !_.isUndefined(acVoltage) && !_.isUndefined(sog) &&  !_.isUndefined(sun) ) {\n    res = (_.isUndefined(rpm) || rpm === 0) && sog < 0.5 && sun !== 'day'\n    //res = 1\n}\n\nif ( res === false ) {\n    node.status({fill:\"red\",shape:\"ring\",text:\"off\"});\n} else {\n    node.status({fill:\"green\",shape:\"dot\",text:\"on\"});\n}\n\nif ( state != res ) {\n    return {payload: res ? 1 : 0 }\n}",
-      "type" : "function",
-      "name" : "Check Anchor Light",
-      "outputs" : 1,
-      "y" : 60
-   },
-   {
-      "x" : 570,
-      "wires" : [],
-      "id" : "8cd816d5.e67028",
-      "z" : "cf96057a.038f88",
-      "name" : "Anchor Light",
-      "path" : "electrical.switches.venus-1.state",
-      "type" : "signalk-send-put",
-      "y" : 60
-   },
-   {
-      "name" : "Check ACR",
-      "type" : "function",
-      "y" : 180,
-      "outputs" : 1,
-      "x" : 310,
-      "noerr" : 0,
-      "id" : "235e9b3d.b4f944",
-      "func" : "\nlet _ = global.get('lodash')\nlet app = global.get('app')\n\nlet mode = app.getSelfPath('electrical.chargers.261.chargingMode.value')\nlet rpm = app.getSelfPath('propulsion.port.revolutions.value')\nlet state = app.getSelfPath('electrical.switches.venus-0.state.value')\n\nlet res = false\nif ( !_.isUndefined(mode) && !_.isUndefined(rpm) ) {\n    res = (mode === 'off' || mode === 'inverting') && rpm > 0\n}\n\nif ( res === false ) {\n    node.status({fill:\"red\",shape:\"ring\",text:\"off\"});\n} else {\n    node.status({fill:\"green\",shape:\"dot\",text:\"on\"});\n}\n\nif ( state != res ) {\n    return {payload: res ? 1 : 0 }\n}",
-      "wires" : [
-         [
-            "222ecb4.3b9b634"
-         ]
-      ],
-      "z" : "cf96057a.038f88"
-   },
-   {
-      "y" : 180,
-      "type" : "signalk-send-put",
-      "name" : "ACR",
-      "path" : "electrical.switches.venus-0.state",
-      "z" : "cf96057a.038f88",
-      "id" : "222ecb4.3b9b634",
-      "wires" : [],
-      "x" : 550
+      "pauseType" : "rate",
+      "type" : "delay",
+      "timeout" : "5",
+      "drop" : true,
+      "name" : "",
+      "x" : 640,
+      "rate" : "1"
    }
 ]
