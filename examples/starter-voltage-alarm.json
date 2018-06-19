@@ -1,0 +1,138 @@
+[
+   {
+      "x" : 90,
+      "y" : 440,
+      "id" : "e61bd5ff.ed0d18",
+      "type" : "signalk-subscribe",
+      "wires" : [
+         [
+            "39178c77.3c94d4"
+         ]
+      ],
+      "name" : "starter voltage",
+      "period" : "5000",
+      "z" : "9d05e907.a5601",
+      "path" : "electrical.batteries.260-second.voltage",
+      "flatten" : true,
+      "context" : "vessels.self"
+   },
+   {
+      "repair" : false,
+      "x" : 280,
+      "checkall" : "false",
+      "id" : "39178c77.3c94d4",
+      "rules" : [
+         {
+            "t" : "lt",
+            "vt" : "str",
+            "v" : "12"
+         },
+         {
+            "v" : "12",
+            "vt" : "str",
+            "t" : "gte"
+         }
+      ],
+      "y" : 440,
+      "type" : "switch",
+      "outputLabels" : [
+         "low",
+         "normal"
+      ],
+      "wires" : [
+         [
+            "a567da8f.c89878"
+         ],
+         [
+            "78395455.529b6c"
+         ]
+      ],
+      "propertyType" : "msg",
+      "outputs" : 2,
+      "name" : "check voltage",
+      "z" : "9d05e907.a5601",
+      "property" : "payload"
+   },
+   {
+      "name" : "alarm",
+      "z" : "9d05e907.a5601",
+      "action" : "",
+      "from" : "",
+      "property" : "",
+      "reg" : false,
+      "to" : "",
+      "x" : 450,
+      "y" : 400,
+      "rules" : [
+         {
+            "tot" : "json",
+            "t" : "set",
+            "p" : "payload",
+            "pt" : "msg",
+            "to" : "{\"state\":\"alarm\",\"message\":\"The starter battery voltage is low\"}"
+         }
+      ],
+      "id" : "a567da8f.c89878",
+      "type" : "change",
+      "wires" : [
+         [
+            "f253f084.ade38"
+         ]
+      ]
+   },
+   {
+      "to" : "",
+      "x" : 450,
+      "y" : 480,
+      "rules" : [
+         {
+            "t" : "set",
+            "pt" : "msg",
+            "to" : "{\"state\":\"normal\",\"message\":\"The starter battery voltage is normal\"}",
+            "p" : "payload",
+            "tot" : "json"
+         }
+      ],
+      "id" : "78395455.529b6c",
+      "type" : "change",
+      "wires" : [
+         [
+            "f253f084.ade38"
+         ]
+      ],
+      "name" : "normal",
+      "z" : "9d05e907.a5601",
+      "action" : "",
+      "from" : "",
+      "property" : "",
+      "reg" : false
+   },
+   {
+      "x" : 600,
+      "id" : "f253f084.ade38",
+      "y" : 440,
+      "type" : "signalk-delay",
+      "delay" : "60000",
+      "wires" : [
+         [
+            "7e8e3f4d.763338"
+         ]
+      ],
+      "name" : "60s delay",
+      "z" : "9d05e907.a5601"
+   },
+   {
+      "name" : "voltage alarm",
+      "z" : "9d05e907.a5601",
+      "sound" : true,
+      "path" : "electrical.batteries.260-second.voltage",
+      "state" : "alarm",
+      "x" : 760,
+      "y" : 440,
+      "id" : "7e8e3f4d.763338",
+      "visual" : true,
+      "type" : "signalk-send-notification",
+      "message" : "",
+      "wires" : []
+   }
+]
