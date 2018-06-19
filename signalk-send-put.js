@@ -8,6 +8,7 @@ module.exports = function(RED) {
     
     node.on('input', msg => {
       app.putSelfPath(config.path, msg.payload)
+      node.status({fill:"green",shape:"dot",text:`value: ${msg.payload}`});
     })
   }
   RED.nodes.registerType("signalk-send-put", signalKSendPut);

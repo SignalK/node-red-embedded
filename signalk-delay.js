@@ -18,8 +18,14 @@ module.exports = function(RED) {
       if ( !firstMessage ) {
         node.context().set('firstMessage', Date.now())
         node.context().set('lastValue', msg.payload)
-      } else if ( Date.now() - firstMessage > (config.delay) ) {
-        node.send(msg)
+      } else {
+        let diff = Date.now() - firstMessage
+        if ( diff > config.delay ) {
+          node.send(msg)
+          node.status({fill:"green",shape:"dot",text:`sent`});
+        } else {
+          node.status({fill:"green",shape:"dot",text:`${diff/1000}s`});
+        }
       }
 
     })
