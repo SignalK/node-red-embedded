@@ -27,7 +27,8 @@
       "signalk-send-nmea0183": "signalk-send-nmea0183.js",
       "signalk-geofence": "signalk-geofence.js",
       "signalk-geofence-switch": "signalk-geofence-switch.js",
-      "signalk-delay": "signalk-delay.js"
+      "signalk-delay": "signalk-delay.js",
+      "signalk-put-handler": "signalk-put-handler.js"
     }
   }
 }

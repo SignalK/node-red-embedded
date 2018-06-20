@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-put-handler',{
+        category: 'input',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""},
+          path: {value:""}
+        },
+        inputs:0,
+        outputs:1,
+        icon: "bridge.png",
+        label: function() {
+            return this.name||"signalk-put-handler";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-put-handler">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+        <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-put-handler">
+    <p>Input that sends messages when a PUT is sent to the server for the given path</p>
+</script>
