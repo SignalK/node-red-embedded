@@ -24,6 +24,9 @@ See the examples folder for some sample usage.
 ## Send a tweet when leaving or arriving at the slip
 ![Alt text](screens/tweet-when-leaving.jpeg)
 
+## GPIO and put handler 
+Sends the state of a digital gpio pin into Signal K and allows at PUT request to the server to set the state of a pin.
+![Alt text](screens/gpio.jpeg)
 
 # Available Nodes
 
