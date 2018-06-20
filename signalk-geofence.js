@@ -66,7 +66,7 @@ module.exports = function(RED) {
         } 
       }
     })
-    }, 1000)
+    }, 5000)
 
     node.on('close', function() {
       unsubscribes.forEach(function(func) { func() })
