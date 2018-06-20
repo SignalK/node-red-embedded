@@ -57,9 +57,10 @@ module.exports = function(RED) {
         let current = payload[2].payload
         //console.log(`${last} ${current} ${config.mode}`)
         if ( !last && config.mode === 'sendChangesIgnore' ) {
+          node.context().set('lastValue', current)
           return
         } else if ( !config.mode || config.mode === 'sendAll' || !last
-                    || (config.mode === 'sendChanges' && last != current) ) {
+                    || last != current ) {
           node.context().set('lastValue', current)
           node.status(status);
           node.send(payload)

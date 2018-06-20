@@ -4,6 +4,7 @@
         color: '#ffcc01',
         defaults: {
           name: {value:""},
+          mode: {value:"sendAll"},
           flatten: {value: true},
           context: {value:"vessels.self"},
           path: {value:""},
@@ -23,6 +24,14 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+  <label for="node-input-mode"><i class="icon-tag"></i> Mode</label>
+  <select id="node-input-mode" placeholder="Mode">
+    <option value="sendAll">send all messages</option>
+    <option value="sendChanges">send when value changes</option>
+    <option value="sendChangesIgnore">send when value changes (ignoring initial value)</option>
+  </select>
   </div>
   <div class="form-row">
         <label for="node-input-flatten"><i class="icon-tag"></i> Flatten</label>

@@ -23,9 +23,12 @@ module.exports = function(RED) {
     }
 
     let showingStatus = false
-    function showStatus(value) {
+    function showStatus(value, title) {
       if ( ! showingStatus ) {
-        node.status({fill:"green",shape:"dot",text: value != null ? `sending ${value}` : "sending"});
+        if ( !title ) {
+          title = 'sending'
+        }
+        node.status({fill:"green",shape:"dot",text: value != null ? `${title} ${value}` : "sending"});
         showingStatus = true;
         setTimeout( () => {
           node.status({});
@@ -36,18 +39,33 @@ module.exports = function(RED) {
 
     function on_delta(delta) {
       if ( delta.updates ) {
+        try {
+        
         if ( typeof config.flatten === 'undefined' || !config.flatten ) {
           var copy = JSON.parse(JSON.stringify(delta))
           copy.updates = []
           delta.updates.forEach(update => {
             if ( update.values &&
                  (!update.$source || !update.$source.startsWith('signalk-node-red') ) && (!config.source || update.$source == config.source) ) {
-              copy.updates.push(update)
+
+              let last = node.context()[update.values[0].path]
+              let current = update.values[0].value
+              if ( !last && config.mode === 'sendChangesIgnore' ) {
+                showStatus(current, 'ignoring')
+                node.context()[update.values[0].path] = current
+                return
+              } else if ( !config.mode || config.mode === 'sendAll' || !last
+                          || (last != current) ) {
+                node.context()[update.values[0].path] = current
+                copy.updates.push(update)
+              }  else {
+                showStatus(current, 'ignoring')
+              }
             }
           })
           
           if ( copy.updates.length > 0 ) {
-            showStatus(null)
+            showStatus(copy.updates[0].values[0].value)
             if ( copy.context == app.selfContext ) {
               copy.context = 'vessels.self'
             }
@@ -58,27 +76,45 @@ module.exports = function(RED) {
             if ( update.values &&
                  (!update.$source || !update.$source.startsWith('signalk-node-red') ) && ((!config.source || config.source.length === 0) || update.$source == config.source) ) {
               update.values.forEach(pathValue => {
-                showStatus(pathValue.value)
-                node.send({
-                  $source: update.$source,
-                  source: update.source,
-                  context: delta.context == app.selfContext ? 'vessels.self' : delta.context,
-                  payload: pathValue.value,
-                  topic: pathValue.path
-                })
+                let last = node.context()[pathValue.path]
+                let current = pathValue.value
+                if ( !last && config.mode === 'sendChangesIgnore' ) {
+                  node.context()[pathValue.path] = current
+                  showStatus(current, 'ignoring')
+                  return
+                } else if ( !config.mode || config.mode === 'sendAll' || !last
+                            || (last != current) ) {
+                  showStatus(pathValue.value)
+                  node.context()[pathValue.path] = current
+                  node.send({
+                    $source: update.$source,
+                    source: update.source,
+                    context: delta.context == app.selfContext ? 'vessels.self' : delta.context,
+                    payload: pathValue.value,
+                    topic: pathValue.path
+                  })
+                } else {
+                  showStatus(current, 'ignoring')
+                }
               })
             }
           })
         }
+        } catch ( err ) {
+          node.error(err)
+          console.error(err.stack);
+        }
       }
     }
 
-    smanager.subscribe(subscription,
-                       onStop,
-                       (err) => {
-                         node.error('subscription error', err)
-                       },
-                       on_delta);
+    setTimeout( () => {
+      smanager.subscribe(subscription,
+                         onStop,
+                         (err) => {
+                           node.error('subscription error', err)
+                         },
+                         on_delta);
+    }, 5000)
 
     
     node.on('close', function() {
