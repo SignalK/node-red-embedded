@@ -1,0 +1,84 @@
+[
+   {
+      "name" : "",
+      "read" : true,
+      "y" : 360,
+      "id" : "4da5f9f7.17b368",
+      "z" : "cf96057a.038f88",
+      "wires" : [
+         [
+            "dccea2ff.76b6a8"
+         ]
+      ],
+      "debounce" : "25",
+      "type" : "rpi-gpio in",
+      "pin" : "11",
+      "intype" : "tri",
+      "x" : 90
+   },
+   {
+      "id" : "dccea2ff.76b6a8",
+      "z" : "cf96057a.038f88",
+      "y" : 360,
+      "action" : "",
+      "name" : "",
+      "x" : 300,
+      "property" : "",
+      "to" : "",
+      "type" : "change",
+      "rules" : [
+         {
+            "p" : "topic",
+            "pt" : "msg",
+            "to" : "electrical.switches.pin-7.state",
+            "t" : "set",
+            "tot" : "str"
+         }
+      ],
+      "from" : "",
+      "wires" : [
+         [
+            "9d2990b.d36fc7"
+         ]
+      ],
+      "reg" : false
+   },
+   {
+      "y" : 360,
+      "z" : "cf96057a.038f88",
+      "id" : "9d2990b.d36fc7",
+      "name" : "",
+      "type" : "signalk-send-pathvalue",
+      "x" : 530,
+      "wires" : [],
+      "source" : ""
+   },
+   {
+      "name" : "",
+      "id" : "d65248aa.5b2bf",
+      "z" : "cf96057a.038f88",
+      "y" : 440,
+      "wires" : [
+         [
+            "8d42add0.344ac"
+         ]
+      ],
+      "x" : 130,
+      "path" : "electrical.switches.pin-11.state",
+      "type" : "signalk-put-handler"
+   },
+   {
+      "name" : "",
+      "y" : 440,
+      "z" : "cf96057a.038f88",
+      "id" : "8d42add0.344ac",
+      "out" : "out",
+      "wires" : [],
+      "type" : "rpi-gpio out",
+      "pin" : "11",
+      "set" : "",
+      "x" : 380,
+      "freq" : "",
+      "level" : "0"
+   }
+]
