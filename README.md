@@ -8,27 +8,27 @@ See the examples folder for flows from the following examples..
 # Examples
 
 ## Send an adjusted depth value
-![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/adjust-depth.jpeg)
+![Alt text](https://raw.githubusercontent.com/SignalK/node-red-embedded/master/screens/adjust-depth.jpeg)
 
 ## Switch relays based on complex conditions (example turns on/off the anchor light and ACR automatically)
-![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/switch-automation.jpeg)
+![Alt text](https://raw.githubusercontent.com/SignalK/node-red-embedded/master/screens/switch-automation.jpeg)
 
 ## Send an alarm when wind speed is high
-![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/high-wind-speed-alarm.jpeg)
+![Alt text](https://raw.githubusercontent.com/SignalK/node-red-embedded/master/screens/high-wind-speed-alarm.jpeg)
 
 ## Send an alarm when the starter battery voltage is low for more and 60 seconds. (this keeps the alarm from going off while starting the engine)
-![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/starter-voltage-alarm.jpeg)
+![Alt text](https://raw.githubusercontent.com/SignalK/node-red-embedded/master/screens/starter-voltage-alarm.jpeg)
 
 
 ## Send an alarm when the AC input voltage is low and the boat is in its slip
-![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/ac-in-voltage-alarm.jpeg)
+![Alt text](https://raw.githubusercontent.com/SignalK/node-red-embedded/master/screens/ac-in-voltage-alarm.jpeg)
 
 ## Send a tweet when leaving or arriving at the slip
-![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/tweet-when-leaving.jpeg)
+![Alt text](https://raw.githubusercontent.com/SignalK/node-red-embedded/master/screens/tweet-when-leaving.jpeg)
 
 ## GPIO and put handler 
 Sends the state of a digital gpio pin into Signal K and allows at PUT request to the server to set the state of a pin.
-![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/gpio.jpeg)
+![Alt text](https://raw.githubusercontent.com/SignalK/node-red-embedded/master/screens/gpio.jpeg)
 
 # Available Nodes
 
