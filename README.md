@@ -6,7 +6,7 @@ See the examples folder for some sample usage.
 # Examples
 
 ## Send an adjusted depth value
-![Alt text](screens/adjust-depth.jpeg)
+![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/adjust-depth.jpeg)
 
 ## Switch relays based on complex conditions (example turns on/off the anchor light and ACR automatically)
 ![Alt text](screens/switch-automation.jpeg)
