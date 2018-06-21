@@ -1,7 +1,9 @@
 # node-red-embedded
-Node red nodes for use with the signalk-node-red plugin
+Node red nodes used by the [signalk-node-red](https://github.com/SignalK/signalk-node-red) plugin which embeds node-red into [signalk-node-server](https://github.com/SignalK/signalk-server-node).
 
-See the examples folder for some sample usage.
+Please note that these nodes only work when node-red is embedded in signalk-node-server.
+
+See the examples folder for flows from the following examples..
 
 # Examples
 
