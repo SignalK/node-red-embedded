@@ -9,24 +9,24 @@ See the examples folder for some sample usage.
 ![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/adjust-depth.jpeg)
 
 ## Switch relays based on complex conditions (example turns on/off the anchor light and ACR automatically)
-![Alt text](screens/switch-automation.jpeg)
+![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/switch-automation.jpeg)
 
 ## Send an alarm when wind speed is high
-![Alt text](screens/high-wind-speed-alarm.jpeg)
+![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/high-wind-speed-alarm.jpeg)
 
 ## Send an alarm when the starter battery voltage is low for more and 60 seconds. (this keeps the alarm from going off while starting the engine)
-![Alt text](screens/starter-voltage-alarm.jpeg)
+![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/starter-voltage-alarm.jpeg)
 
 
 ## Send an alarm when the AC input voltage is low and the boat is in its slip
-![Alt text](screens/ac-in-voltage-alarm.jpeg)
+![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/ac-in-voltage-alarm.jpeg)
 
 ## Send a tweet when leaving or arriving at the slip
-![Alt text](screens/tweet-when-leaving.jpeg)
+![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/tweet-when-leaving.jpeg)
 
 ## GPIO and put handler 
 Sends the state of a digital gpio pin into Signal K and allows at PUT request to the server to set the state of a pin.
-![Alt text](screens/gpio.jpeg)
+![Alt text](https://github.com/SignalK/node-red-embedded/blob/master/screens/gpio.jpeg)
 
 # Available Nodes
 
