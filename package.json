@@ -17,6 +17,7 @@
     "type": "git",
     "url": "https://github.com/SignalK/node-red-embedded"
   },
+  "keywords": [ "node-red" ],
   "node-red": {
     "nodes": {
       "signalk-subscribe": "signalk-subscribe.js",
