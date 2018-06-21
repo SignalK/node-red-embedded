@@ -1,6 +1,6 @@
 {
   "name": "@signalk/node-red-embedded",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Node red nodes for use with the signalk-node-red plugin",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,9 @@
     "type": "git",
     "url": "https://github.com/SignalK/node-red-embedded"
   },
-  "keywords": [ "node-red" ],
+  "keywords": [
+    "node-red"
+  ],
   "node-red": {
     "nodes": {
       "signalk-subscribe": "signalk-subscribe.js",
