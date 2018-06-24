@@ -56,6 +56,14 @@ The output payload will be the value and the topic will be the path, The payload
 }
 ```
 
+## signalk-input-handler
+
+Input that allows a flow to modify or filter deltas before they get to the server. Once the data is modified, it should be connected to the signalk-input-filter-next node.
+
+## signalk-input-handler-next
+
+Output that should be used to send a delta on after processing using the signalk-inout-filter node.
+
 ## signalk-geofence-switch
 
 Function that checks if a vessel is inside of the specified geofence
