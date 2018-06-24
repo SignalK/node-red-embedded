@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-input-handler-next',{
+        category: 'output',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "bridge.png",
+        align: 'right',
+        label: function() {
+            return this.name||"signalk-input-handler-next";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-input-handler-next">
+  <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-input-handler-next">
+  <p>Output that should be used to send a delta on after processing using the signalk-inout-filter node.</p>
+</script>

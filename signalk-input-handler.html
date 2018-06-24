@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-input-handler',{
+        category: 'input',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""},
+          context: {value:"vessels.self"},
+          path: {value:""},
+          source: {value: ""},
+        },
+        inputs:0,
+        outputs:1,
+        icon: "bridge.png",
+        label: function() {
+            return this.name||"signalk-input-handler";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-input-handler">
+  <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-context"><i class="icon-tag"></i> Context</label>
+        <input type="text" id="node-input-context" placeholder="Context">
+  </div>
+  <div class="form-row">
+        <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+        <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+  <div class="form-row">
+        <label for="node-input-source"><i class="icon-tag"></i> $Source</label>
+        <input type="text" id="node-input-source" placeholder="$Source">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-input-handler">
+    <p>Input that allows a flow to modify or filter deltas before they get to the server. Once the data is modified, it should be connected to the signalk-input-filter-next node.</p>
+</script>
