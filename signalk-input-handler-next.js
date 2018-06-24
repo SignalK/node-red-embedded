@@ -10,8 +10,11 @@ module.exports = function(RED) {
       let next = node.context().flow.get('signalk-input-handler.next')
       if ( msg.topic ) {
         let delta = {
+          context: msg.context,
           updates: [
             {
+              source: msg.source,
+              $source: msg.$source,
               values: [
                 {
                   value: msg.payload,
@@ -21,13 +24,16 @@ module.exports = function(RED) {
             }
           ]
         }
+        /*
         if ( msg.source && msg.source.length > 0 ) {
           delta.updates[0].$source = msg.source
         }
-        next('node-red', delta)
-        let c = msg.topic.lastIndexOf('.')
+        */
+        //node.error(JSON.stringify(delta))
+       // console.log(JSON.stringify(delta))
+        next(delta)
       } else {
-        next('node-red', msg.payload)
+        //next(msg.payload)
       }
     })
   }

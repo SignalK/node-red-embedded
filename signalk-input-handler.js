@@ -4,12 +4,15 @@ module.exports = function(RED) {
     RED.nodes.createNode(this,config);
     var node = this;
 
-    var app = node.context().global.get('app')
+    var plugin = node.context().global.get('plugin')
 
-    let onClose = app.registerDeltaInputHandler((id, delta, next) => {
-      node.context().flow.set('signalk-input-handler.next', next)
-      node.send({payload: delta})
-    })
+    let onClose = plugin.registerDeltaInputHandler(config.context,
+                                                   config.path,
+                                                   config.source,
+                                                   (pv, next) => {
+                                                     node.context().flow.set('signalk-input-handler.next', next)
+                                                     node.send(pv)
+                                                   })
 
     node.on('close', function() {
       onClose()
