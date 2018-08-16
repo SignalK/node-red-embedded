@@ -69,7 +69,7 @@ module.exports = function(RED) {
             if ( copy.context == app.selfContext ) {
               copy.context = 'vessels.self'
             }
-            node.send({ payload: copy })
+            node.send({ payload: copy  })
           }
         } else {
           delta.updates.forEach(update => {
@@ -91,7 +91,8 @@ module.exports = function(RED) {
                     source: update.source,
                     context: delta.context == app.selfContext ? 'vessels.self' : delta.context,
                     payload: pathValue.value,
-                    topic: pathValue.path
+                    topic: pathValue.path,
+                    timestamp: update.timestamp
                   })
                 } else {
                   showStatus(current, 'ignoring')
