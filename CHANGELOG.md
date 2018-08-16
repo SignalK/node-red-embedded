@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.9.0 (2018/08/16 16:42 +00:00)
+- [#5](https://github.com/SignalK/node-red-embedded/pull/5) feature: include timestamp in flattened subscriptions (@sbender9)
+
 ### v2.8.1 (2018/08/13 14:40 +00:00)
 - [#4](https://github.com/SignalK/node-red-embedded/pull/4) docs: update input handler docs (@sbender9)
 - [#3](https://github.com/SignalK/node-red-embedded/pull/3) docs: update input handler docs (@sbender9)
