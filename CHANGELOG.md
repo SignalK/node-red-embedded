@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.10.0 (2018/09/11 18:14 +00:00)
+- [#6](https://github.com/SignalK/node-red-embedded/pull/6) feature: add ability to receive events from the signalk-node-server app (@sbender9)
+
 ### v2.9.0 (2018/08/16 16:42 +00:00)
 - [#5](https://github.com/SignalK/node-red-embedded/pull/5) feature: include timestamp in flattened subscriptions (@sbender9)
 
