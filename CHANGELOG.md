@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.11.0 (2018/09/11 19:07 +00:00)
+- [#7](https://github.com/SignalK/node-red-embedded/pull/7) feature: allow subscriptions to paths coming from node red nodes (@sbender9)
+
 ### v2.10.0 (2018/09/11 18:14 +00:00)
 - [#6](https://github.com/SignalK/node-red-embedded/pull/6) feature: add ability to receive events from the signalk-node-server app (@sbender9)
 
