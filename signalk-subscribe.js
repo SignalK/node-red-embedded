@@ -46,7 +46,10 @@ module.exports = function(RED) {
           copy.updates = []
           delta.updates.forEach(update => {
             if ( update.values &&
-                 (!update.$source || !update.$source.startsWith('signalk-node-red') ) && (!config.source || update.$source == config.source) ) {
+                 (!update.$source ||
+                  (!update.$source.startsWith('signalk-node-red')
+                  || config.source === 'signalk-node-red') )
+                 && (!config.source || update.$source == config.source) ) {
 
               let last = node.context()[update.values[0].path]
               let current = update.values[0].value
@@ -74,7 +77,11 @@ module.exports = function(RED) {
         } else {
           delta.updates.forEach(update => {
             if ( update.values &&
-                 (!update.$source || !update.$source.startsWith('signalk-node-red') ) && ((!config.source || config.source.length === 0) || update.$source == config.source) ) {
+                 (!update.$source || 
+                  (!update.$source.startsWith('signalk-node-red')
+                   || config.source === 'signalk-node-red') )
+                 && ((!config.source || config.source.length === 0)
+                     || update.$source == config.source) ) {
               update.values.forEach(pathValue => {
                 let last = node.context()[pathValue.path]
                 let current = pathValue.value
