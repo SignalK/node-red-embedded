@@ -24,6 +24,7 @@
     "nodes": {
       "signalk-subscribe": "signalk-subscribe.js",
       "signalk-on-delta": "signalk-on-delta.js",
+      "signalk-app-event": "signalk-app-event.js",
       "signalk-notification-": "signalk-notification.js",
       "signalk-flatten-delta": "signalk-flatten-delta.js",
       "signalk-send-delta": "signalk-send-delta.js",
