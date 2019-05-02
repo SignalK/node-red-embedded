@@ -35,7 +35,7 @@ module.exports = function(RED) {
         */
         //node.error(JSON.stringify(delta))
         //console.log(JSON.stringify(delta))
-        //next(delta)
+        next(delta)
       } else {
         //next(msg.payload)
       }
