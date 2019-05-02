@@ -23,14 +23,14 @@
   "node-red": {
     "nodes": {
       "signalk-subscribe": "signalk-subscribe.js",
+      "signalk-notification-": "signalk-notification.js",
       "signalk-on-delta": "signalk-on-delta.js",
       "signalk-app-event": "signalk-app-event.js",
-      "signalk-notification-": "signalk-notification.js",
       "signalk-flatten-delta": "signalk-flatten-delta.js",
-      "signalk-send-delta": "signalk-send-delta.js",
       "signalk-send-pathvalue": "signalk-send-pathvalue.js",
-      "signalk-send-put": "signalk-send-put.js",
+      "signalk-send-delta": "signalk-send-delta.js",
       "signalk-send-notification": "signalk-send-notification.js",
+      "signalk-send-put": "signalk-send-put.js",
       "signalk-send-nmea2000": "signalk-send-nmea2000.js",
       "signalk-send-nmea0183": "signalk-send-nmea0183.js",
       "signalk-geofence": "signalk-geofence.js",

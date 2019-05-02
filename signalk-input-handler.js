@@ -11,6 +11,7 @@ module.exports = function(RED) {
                                                    config.source,
                                                    (pv, next) => {
                                                      node.context().flow.set('signalk-input-handler.next', next)
+                                                     pv.next = next
                                                      node.send(pv)
                                                    })
 
