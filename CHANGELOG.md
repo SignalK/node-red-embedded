@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.12.0 (2019/05/02 14:38 +00:00)
+- [#9](https://github.com/SignalK/node-red-embedded/pull/9)  feature: show feedback on the status of sending a put (@sbender9)
+
 ### v2.11.0 (2018/09/11 19:07 +00:00)
 - [#7](https://github.com/SignalK/node-red-embedded/pull/7) feature: allow subscriptions to paths coming from node red nodes (@sbender9)
 
