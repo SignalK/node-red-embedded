@@ -8,6 +8,9 @@ module.exports = function(RED) {
 
     node.on('input', msg => {
       let next = node.context().flow.get('signalk-input-handler.next')
+      if ( msg.next ) {
+        next = msg.next
+      }
       if ( msg.topic ) {
         let delta = {
           context: msg.context,
@@ -15,6 +18,7 @@ module.exports = function(RED) {
             {
               source: msg.source,
               $source: msg.$source,
+              timestamp: msg.timestamp,
               values: [
                 {
                   value: msg.payload,
@@ -30,8 +34,8 @@ module.exports = function(RED) {
         }
         */
         //node.error(JSON.stringify(delta))
-       // console.log(JSON.stringify(delta))
-        next(delta)
+        //console.log(JSON.stringify(delta))
+        //next(delta)
       } else {
         //next(msg.payload)
       }
