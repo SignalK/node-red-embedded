@@ -8,7 +8,7 @@ module.exports = function(RED) {
 
     function handlePut(context, path, value, cb) {
       node.send({topic: path, payload: value})
-      return { state: 'COMPLETED' }
+      return { state: 'SUCCESS' }
     }
 
     let deReg = app.registerActionHandler('vessels.self', config.path,
