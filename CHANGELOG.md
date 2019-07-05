@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.12.2 (2019/07/05 14:46 +00:00)
+- [#11](https://github.com/SignalK/node-red-embedded/pull/11) fix: put handler returning incorrect status (@sbender9)
+
 ### v2.12.1 (2019/05/02 15:52 +00:00)
 - [#10](https://github.com/SignalK/node-red-embedded/pull/10) fix: signalk-handler-next not passing on data (@sbender9)
 
