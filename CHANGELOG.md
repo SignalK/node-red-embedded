@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.13.1 (2020/03/14 01:28 +00:00)
+- [#14](https://github.com/SignalK/node-red-embedded/pull/14) fix: send-put node showing an error when it worked (@sbender9)
+- [#13](https://github.com/SignalK/node-red-embedded/pull/13) chore: remove debug logging (@sbender9)
+
 ### v2.13.0 (2020/03/14 00:25 +00:00)
 - [#12](https://github.com/SignalK/node-red-embedded/pull/12) feature: allow the $source to be specified for send-notification (@sbender9)
 
