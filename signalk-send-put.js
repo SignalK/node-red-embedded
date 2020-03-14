@@ -32,7 +32,9 @@ module.exports = function(RED) {
           .then(reply => {
             let fill
             let text
-            if ( !app.queryRequest || (reply.state === 'COMPLETED' && reply.result === 200) ) {
+                      console.log(JSON.stringify(reply))
+
+            if ( !app.queryRequest || (reply.state === 'COMPLETED' && reply.statusCode === 200) ) {
               fill = 'green'
               text = `value: ${msg.payload}`
             } else if ( reply.state === 'PENDING' ) {
