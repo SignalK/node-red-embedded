@@ -24,6 +24,7 @@ module.exports = function(RED) {
       let path = info && info.path ? info.path : config.path
       let state = info && info.state ? info.state : config.state
       let message = info && info.message ? info.message : config.message
+      let $source = info && info.$source ? info.$source : config.source
       let method
       if ( info && info.method ){
         method = info.method
@@ -41,6 +42,7 @@ module.exports = function(RED) {
       let delta = {
         updates: [
           {
+            $source: $source,
             values: [
               {
                 path: 'notifications.' + path,
@@ -54,6 +56,7 @@ module.exports = function(RED) {
           }
         ]
       }
+      console.log(JSON.stringify(config, null, 2))
       showStatus(state)
       app.handleMessage('signalk-node-red', delta)
       //node.send({payload: delta})
