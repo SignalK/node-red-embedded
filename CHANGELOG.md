@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.13.0 (2020/03/14 00:25 +00:00)
+- [#12](https://github.com/SignalK/node-red-embedded/pull/12) feature: allow the $source to be specified for send-notification (@sbender9)
+
 ### v2.12.2 (2019/07/05 14:46 +00:00)
 - [#11](https://github.com/SignalK/node-red-embedded/pull/11) fix: put handler returning incorrect status (@sbender9)
 
