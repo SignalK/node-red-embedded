@@ -56,7 +56,6 @@ module.exports = function(RED) {
           }
         ]
       }
-      console.log(JSON.stringify(config, null, 2))
       showStatus(state)
       app.handleMessage('signalk-node-red', delta)
       //node.send({payload: delta})
