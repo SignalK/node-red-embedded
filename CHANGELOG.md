@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.14.0 (2020/04/15 14:43 +00:00)
+- [#15](https://github.com/SignalK/node-red-embedded/pull/15) feature: add support to specify $source for puts (@sbender9)
+
 ### v2.13.1 (2020/03/14 01:32 +00:00)
 - [#14](https://github.com/SignalK/node-red-embedded/pull/14) fix: send-put node showing an error when it worked (@sbender9)
 - [#13](https://github.com/SignalK/node-red-embedded/pull/13) chore: remove debug logging (@sbender9)
