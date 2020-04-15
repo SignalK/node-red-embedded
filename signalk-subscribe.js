@@ -53,11 +53,13 @@ module.exports = function(RED) {
 
               let last = node.context()[update.values[0].path]
               let current = update.values[0].value
-              if ( !last && config.mode === 'sendChangesIgnore' ) {
+              if ( typeof last === 'undefined' && config.mode === 'sendChangesIgnore' ) {
                 showStatus(current, 'ignoring')
                 node.context()[update.values[0].path] = current
                 return
-              } else if ( !config.mode || config.mode === 'sendAll' || !last
+              } else if ( !config.mode
+                          || config.mode === 'sendAll'
+                          || typeof last === 'undefined'
                           || (last != current) ) {
                 node.context()[update.values[0].path] = current
                 copy.updates.push(update)
@@ -85,11 +87,14 @@ module.exports = function(RED) {
               update.values.forEach(pathValue => {
                 let last = node.context()[pathValue.path]
                 let current = pathValue.value
-                if ( !last && config.mode === 'sendChangesIgnore' ) {
+                if ( typeof last === 'undefined'
+                     && config.mode === 'sendChangesIgnore' ) {
                   node.context()[pathValue.path] = current
                   showStatus(current, 'ignoring')
                   return
-                } else if ( !config.mode || config.mode === 'sendAll' || !last
+                } else if ( !config.mode
+                            || config.mode === 'sendAll'
+                            || typeof last === 'undefined'
                             || (last != current) ) {
                   showStatus(pathValue.value)
                   node.context()[pathValue.path] = current
