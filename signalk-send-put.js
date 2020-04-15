@@ -22,18 +22,13 @@ module.exports = function(RED) {
             } else {
               node.status({fill:'red',shape:"dot",text:`error`})
               node.error(`put error ${reply.statusCode} ${reply.message || ''}`)
-              if ( reply.message ) {
-                node.error(reply.message)
-              }
             }
           }
-        })
+        }, config.source && config.source.length > 0 ? config.source : undefined)
         Promise.resolve(res)
           .then(reply => {
             let fill
             let text
-                      console.log(JSON.stringify(reply))
-
             if ( !app.queryRequest || (reply.state === 'COMPLETED' && reply.statusCode === 200) ) {
               fill = 'green'
               text = `value: ${msg.payload}`
@@ -42,7 +37,7 @@ module.exports = function(RED) {
               text = 'pending...'
             } else {
               fill = 'red'
-              text = `error : ${reply.result} ${reply.message || ''}`
+              text = `error : ${reply.statusCode} ${reply.message || ''}`
             }
             node.status({fill:fill,shape:"dot",text:text})
           })
