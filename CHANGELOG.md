@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.15.0 (2020/04/23 16:57 +00:00)
+- [#16](https://github.com/SignalK/node-red-embedded/pull/16) feature: simplify node names and move to Signal K section of pallete (@sbender9)
+
 ### v2.14.0 (2020/04/15 14:43 +00:00)
 - [#15](https://github.com/SignalK/node-red-embedded/pull/15) feature: add support to specify $source for puts (@sbender9)
 
