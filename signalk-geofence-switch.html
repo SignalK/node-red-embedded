@@ -1,6 +1,6 @@
 <script type="text/javascript">
   RED.nodes.registerType('signalk-geofence-switch',{
-    category: 'function',
+    category: 'Signal K',
     color: '#ffcc01',
     defaults: {
       name: {value:""},
@@ -16,7 +16,8 @@
     icon: "function.png",
     label: function() {
       return this.name||"signalk-geofence-switch";
-    }
+    },
+    paletteLabel: 'geofence switch'
   });
 </script>
 

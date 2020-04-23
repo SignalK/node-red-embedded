@@ -1,6 +1,6 @@
 <script type="text/javascript">
   RED.nodes.registerType('signalk-flatten-delta',{
-    category: 'function',
+    category: 'Signal K',
     color: '#ffcc01',
     defaults: {
       name: {value:""}
@@ -10,7 +10,8 @@
     icon: "function.png",
     label: function() {
       return this.name||"signalk-flatten-delta";
-    }
+    },
+    paletteLabel: 'flatten delta'
   });
 </script>
 
