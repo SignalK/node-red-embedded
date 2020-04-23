@@ -1,6 +1,6 @@
 <script type="text/javascript">
   RED.nodes.registerType('signalk-delay',{
-    category: 'function',
+    category: 'Signal K',
     color: '#ffcc01',
     defaults: {
       name: {value:""},
@@ -11,7 +11,8 @@
     icon: "function.png",
     label: function() {
       return this.name||"signalk-delay";
-    }
+    },
+    paletteLabel: 'delay'
   });
 </script>
 

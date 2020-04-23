@@ -1,6 +1,6 @@
 <script type="text/javascript">
   RED.nodes.registerType('signalk-filter-delta',{
-    category: 'function',
+    category: 'Signal K',
     color: '#ffcc01',
     defaults: {
       name: {value:""},
@@ -12,7 +12,8 @@
     icon: "function.png",
     label: function() {
       return this.name||"signalk-filter-delta";
-    }
+    },
+    paletteLabel: 'filter delta'
   });
 </script>
 

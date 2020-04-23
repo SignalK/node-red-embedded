@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('signalk-subscribe',{
-        category: 'input',
+        category: 'Signal K',
         color: '#ffcc01',
         defaults: {
           name: {value:""},
@@ -16,7 +16,8 @@
         icon: "bridge.png",
         label: function() {
             return this.name||"signalk-subscribe";
-        }
+        },
+        paletteLabel: 'subscribe'
     });
 </script>
 

@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('signalk-input-handler-next',{
-        category: 'output',
+        category: 'Signal K',
         color: '#ffcc01',
         defaults: {
           name: {value:""}
@@ -11,7 +11,8 @@
         align: 'right',
         label: function() {
             return this.name||"signalk-input-handler-next";
-        }
+        },
+        paletteLabel: 'input handler next'
     });
 </script>
 

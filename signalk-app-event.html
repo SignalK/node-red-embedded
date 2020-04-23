@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('signalk-app-event',{
-        category: 'input',
+        category: 'Signal K',
         color: '#ffcc01',
         defaults: {
           name: {value:""},
@@ -11,7 +11,8 @@
         icon: "bridge.png",
         label: function() {
             return this.name||"signalk-app-event";
-        }
+        },
+        paletteLabel: 'app event'
     });
 </script>
 

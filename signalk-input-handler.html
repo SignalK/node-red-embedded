@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('signalk-input-handler',{
-        category: 'input',
+        category: 'Signal K',
         color: '#ffcc01',
         defaults: {
           name: {value:""},
@@ -13,7 +13,8 @@
         icon: "bridge.png",
         label: function() {
             return this.name||"signalk-input-handler";
-        }
+        },
+        paletteLabel: 'input handler'
     });
 </script>
 
