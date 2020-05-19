@@ -6,9 +6,17 @@ module.exports = function(RED) {
 
     const geodist = node.context().global.get('geodist')
     const app = node.context().global.get('app')
-
+    const context = node.context()
 
     node.on('input', (msg) => {
+
+      if ( msg.topic === 'signalk-config' ) {
+        context.latitude = msg.payload.latitude
+        context.longitude = msg.payload.longitude
+        context.distance = msg.payload.distance
+        return
+      }
+      
       var pos;
 
       if ( config.context !== 'vessels.self' ) {
@@ -29,7 +37,17 @@ module.exports = function(RED) {
           fencePos = { lat: mypos.latitude, lon: mypos.longitude }
         }
       } else {
-        fencePos = { lat: config.lat, lon: config.lon }
+        if ( msg.latitude ) {
+          fencePos = { lat: msg.latitude, lon: msg.longitude }
+        } else if ( context.latitude ) {
+          fencePos = { lat: context.latitude, lon: context.longitude }
+        } else {        
+          fencePos = { lat: config.lat, lon: config.lon }
+        }
+        if ( fencePos.lat === 0 && fencePos.lon === 0 ) {
+          node.status({fill:"red",shape:"dot",text:"no lat/lon"});
+          return
+        }
       }
 
       
@@ -38,7 +56,16 @@ module.exports = function(RED) {
         let dist = geodist(fencePos, 
                            curPos,
                            { unit: 'meters'})
-        if ( dist > config.distance ) {
+        let distance
+        if ( msg.distance ) {
+          distance = msg.distance
+        } else if ( context.distance ) {
+          distance = context.distance
+        } else {
+          distance = config.distance
+        }
+
+        if ( dist > distance ) {
           node.status({fill:"green",shape:"dot",text:"outside fence"});
           node.send([null, msg ])
         } else {

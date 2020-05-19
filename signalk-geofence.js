@@ -7,6 +7,17 @@ module.exports = function(RED) {
     const geodist = node.context().global.get('geodist')
     const subscriptionmanager = node.context().global.get('subscriptionmanager')
     const app = node.context().global.get('app')
+    const context = node.context()
+
+    node.on('input', msg => {
+      if ( msg.payload.latitude ) {
+        context.latitude = msg.payload.latitude
+        context.longitude = msg.payload.longitude
+      }
+      if ( msg.payload.distance ) {
+        context.distance = msg.payload.distance
+      }
+    })
 
     var command = {
       context: config.context,
@@ -36,7 +47,14 @@ module.exports = function(RED) {
           fencePos = { lat: mypos.latitude, lon: mypos.longitude }
         }
       } else {
-        fencePos = { lat: config.lat, lon: config.lon }
+        if ( context.latitude ) {
+          fencePos = { lat: context.latitude, lon: context.longitude }
+        } else {
+          fencePos = { lat: config.lat, lon: config.lon }
+        }
+        if ( fencePos.lat === 0 && fencePos.lon === 0 ) {
+          return
+        }
       }
 
       if ( fencePos ) {
@@ -45,7 +63,8 @@ module.exports = function(RED) {
                            { unit: 'meters'})
         let status
         let payload
-        if ( dist > config.distance ) {
+        const distance = context.distance ? context.distance : config.distance
+        if ( dist > distance ) {
           status = {fill:"green",shape:"dot",text:"outside fence"}
           payload = [null, { payload: 'outside' }, { payload: 'outside' }]
         } else {
