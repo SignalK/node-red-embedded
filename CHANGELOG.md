@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.16.0 (2020/05/19 17:15 +00:00)
+- [#19](https://github.com/SignalK/node-red-embedded/pull/19) feature: add inputs for location and distance to geofence nodes (@sbender9)
+
 ### v2.15.0 (2020/04/23 16:57 +00:00)
 - [#16](https://github.com/SignalK/node-red-embedded/pull/16) feature: simplify node names and move to Signal K section of pallete (@sbender9)
 
