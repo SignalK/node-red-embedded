@@ -4,7 +4,8 @@
     color: '#ffcc01',
     defaults: {
       name: {value:""},
-      source: {value: ""}
+      source: {value: ""},
+      meta: {value:"", required:false}
     },
     inputs:1,
     outputs:0,
@@ -13,7 +14,13 @@
     label: function() {
       return this.name||"signalk-send-pathvalue";
     },
-    paletteLabel: 'send pathvalue'
+    paletteLabel: 'send pathvalue',
+    oneditprepare: () => {
+      $("#node-input-meta").typedInput({
+        type:"json",
+        types:["json"]
+      })
+    }
   });
 </script>
 
@@ -25,6 +32,10 @@
   <div class="form-row">
         <label for="node-input-source"><i class="icon-tag"></i> $source</label>
         <input type="text" id="node-input-source" placeholder="$source">
+  </div>
+  <div class="form-row">
+        <label for="node-input-meta"><i class="icon-tag"></i> Meta</label>
+        <input type="text" id="node-input-meta" placeholder='{"units": "V"}'>
   </div>
 </script>
 

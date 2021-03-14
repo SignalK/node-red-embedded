@@ -6,6 +6,7 @@ module.exports = function(RED) {
 
     var app = node.context().global.get('app')
     var source = config.name ? 'node-red-' + config.name : 'node-red'
+    var sentMeta = false
 
     function showStatus(text) {
       node.status({fill:"green",shape:"dot",text:text});
@@ -16,6 +17,27 @@ module.exports = function(RED) {
         node.error('no topic for incomming message')
         return
       }
+
+      if ( config.meta !== "" && !sentMeta ) {
+        let delta = {
+          updates: [
+            {
+              meta: [
+                {
+                  value: JSON.parse(config.meta),
+                  path: msg.topic
+                }
+              ]
+            }
+        ]
+        }
+        if ( config.source && config.source.length > 0 ) {
+          delta.updates[0].$source = config.source
+        }
+        app.handleMessage(source, delta)
+        sentMeta = true
+      }
+      
       let delta = {
         updates: [
           {
