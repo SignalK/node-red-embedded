@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.17.1 (2021/03/14 17:17 +00:00)
+- [#25](https://github.com/SignalK/node-red-embedded/pull/25) fix: errors with existing send-pathvalue without meta data (@sbender9)
+
 ### v2.17.0 (2021/03/14 16:59 +00:00)
 - [#23](https://github.com/SignalK/node-red-embedded/pull/23) fix: source could be "no_source" for notifications (@sbender9)
 - [#24](https://github.com/SignalK/node-red-embedded/pull/24) feature: allow meta data to be specified for send-pathvalue (@sbender9)
