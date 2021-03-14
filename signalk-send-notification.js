@@ -24,7 +24,7 @@ module.exports = function(RED) {
       let path = info && info.path ? info.path : config.path
       let state = info && info.state ? info.state : config.state
       let message = info && info.message ? info.message : config.message
-      let $source = info && info.$source ? info.$source : config.source
+      let source = info && info.$source ? info.$source : config.source
       let method
       if ( info && info.method ){
         method = info.method
@@ -37,12 +37,15 @@ module.exports = function(RED) {
           method.push('sound')
         }
       } 
-      
+
+      if ( typeof source !== 'undefined' &&  source.length === 0 ) {
+        source = undefined
+      }
       
       let delta = {
         updates: [
           {
-            $source: $source,
+            $source: source,
             values: [
               {
                 path: 'notifications.' + path,
