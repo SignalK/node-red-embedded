@@ -18,7 +18,7 @@ module.exports = function(RED) {
         return
       }
 
-      if ( config.meta !== "" && !sentMeta ) {
+      if ( typeof config.meta !== 'undefined' && config.meta !== "" && !sentMeta ) {
         let delta = {
           updates: [
             {
