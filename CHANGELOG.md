@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.17.0 (2021/03/14 16:59 +00:00)
+- [#23](https://github.com/SignalK/node-red-embedded/pull/23) fix: source could be "no_source" for notifications (@sbender9)
+- [#24](https://github.com/SignalK/node-red-embedded/pull/24) feature: allow meta data to be specified for send-pathvalue (@sbender9)
+
 ### v2.16.0 (2020/05/19 17:15 +00:00)
 - [#19](https://github.com/SignalK/node-red-embedded/pull/19) feature: add inputs for location and distance to geofence nodes (@sbender9)
 
