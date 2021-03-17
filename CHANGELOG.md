@@ -1,5 +1,8 @@
 ## Change Log
 
+### v2.17.2 (2021/03/17 16:10 +00:00)
+- [#26](https://github.com/SignalK/node-red-embedded/pull/26) fix: use the msg.topic for put path if none is entered (@sbender9)
+
 ### v2.17.1 (2021/03/14 17:17 +00:00)
 - [#25](https://github.com/SignalK/node-red-embedded/pull/25) fix: errors with existing send-pathvalue without meta data (@sbender9)
 
