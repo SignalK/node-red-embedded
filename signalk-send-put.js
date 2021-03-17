@@ -15,7 +15,8 @@ module.exports = function(RED) {
     node.on('input', msg => {
       node.status({fill:"yellow",shape:"dot",text:`sending...`})
       try {
-        let res = app.putSelfPath(config.path, msg.payload, (reply) => {
+        const path = config.path && config.path.length > 0 ? config.path : msg.topic
+        let res = app.putSelfPath(path, msg.payload, (reply) => {
           if ( reply.state === 'COMPLETED' ) {
             if ( reply.statusCode === 200 ) {
               node.status({fill:'green',shape:"dot",text:`value: ${msg.payload}`})
