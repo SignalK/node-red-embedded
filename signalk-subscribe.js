@@ -7,6 +7,7 @@ module.exports = function(RED) {
     var signalk = node.context().global.get('signalk')
     var app = node.context().global.get('app')
     var smanager = node.context().global.get('subscriptionmanager')
+    let _ = node.context().global.get('lodash')
     var onStop = []
 
     if ( !config.path || config.path.length == 0 ) {
@@ -60,7 +61,7 @@ module.exports = function(RED) {
               } else if ( !config.mode
                           || config.mode === 'sendAll'
                           || typeof last === 'undefined'
-                          || (last != current) ) {
+                          || !_.isEqual(last, current) ) {
                 node.context()[update.values[0].path] = current
                 copy.updates.push(update)
               }  else {
@@ -95,7 +96,7 @@ module.exports = function(RED) {
                 } else if ( !config.mode
                             || config.mode === 'sendAll'
                             || typeof last === 'undefined'
-                            || (last != current) ) {
+                            || !_.isEqual(last, current) ) {
                   showStatus(pathValue.value)
                   node.context()[pathValue.path] = current
                   node.send({
