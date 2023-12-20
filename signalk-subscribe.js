@@ -7,6 +7,7 @@ module.exports = function(RED) {
     var signalk = node.context().global.get('signalk')
     var app = node.context().global.get('app')
     var smanager = node.context().global.get('subscriptionmanager')
+    let _ = node.context().global.get('lodash')
     var onStop = []
 
     if ( !config.path || config.path.length == 0 ) {
