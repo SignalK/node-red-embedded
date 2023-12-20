@@ -1,6 +1,6 @@
 {
   "name": "@signalk/node-red-embedded",
-  "version": "2.17.2",
+  "version": "2.17.3",
   "description": "Node red nodes for use with the signalk-node-red plugin",
   "main": "index.js",
   "scripts": {
