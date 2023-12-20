@@ -60,7 +60,7 @@ module.exports = function(RED) {
               } else if ( !config.mode
                           || config.mode === 'sendAll'
                           || typeof last === 'undefined'
-                          || (last != current) ) {
+                          || !_.isEqual(last, current) ) {
                 node.context()[update.values[0].path] = current
                 copy.updates.push(update)
               }  else {
@@ -95,7 +95,7 @@ module.exports = function(RED) {
                 } else if ( !config.mode
                             || config.mode === 'sendAll'
                             || typeof last === 'undefined'
-                            || (last != current) ) {
+                            || !_.isEqual(last, current) ) {
                   showStatus(pathValue.value)
                   node.context()[pathValue.path] = current
                   node.send({
