@@ -1,0 +1,119 @@
+[
+    {
+        "id": "219b9c95.4e0d5c",
+        "type": "inject",
+        "z": "db137791.d0f408",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "red.autoLights.state",
+        "payload": "autoLights",
+        "payloadType": "global",
+        "x": 110,
+        "y": 740,
+        "wires": [
+            [
+                "d863107a.7222a"
+            ]
+        ]
+    },
+    {
+        "id": "d863107a.7222a",
+        "type": "signalk-send-pathvalue",
+        "z": "db137791.d0f408",
+        "name": "send autoLights",
+        "source": "",
+        "meta": "",
+        "x": 560,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "c1701506.ea4a48",
+        "type": "inject",
+        "z": "db137791.d0f408",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 70,
+        "y": 780,
+        "wires": [
+            [
+                "abd5ad13.d9ec6"
+            ]
+        ]
+    },
+    {
+        "id": "abd5ad13.d9ec6",
+        "type": "change",
+        "z": "db137791.d0f408",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "autoLights",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "red.autoLights.state",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 800,
+        "wires": [
+            [
+                "d863107a.7222a"
+            ]
+        ]
+    },
+    {
+        "id": "fdaeb90a.e8809",
+        "type": "signalk-put-handler",
+        "z": "db137791.d0f408",
+        "name": "",
+        "path": "red.autoLights.state",
+        "x": 90,
+        "y": 840,
+        "wires": [
+            [
+                "abd5ad13.d9ec6"
+            ]
+        ]
+    }
+]
