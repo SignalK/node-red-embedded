@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "changelog": "github-changes -o signalk -r node-red-embedded -a --only-pulls --use-commit-body --data=pulls  --tag-name=v$npm_package_version",
-    "release": "git tag -d v$npm_package_version; npm run changelog && git add CHANGELOG.md && git commit -m 'chore: update changelog' && git tag v$npm_package_version && git push --tags && git push"
+     "create-release": "github-create-release --owner signalk --repository node-red-embedded",
+    "release": "git tag -d v$npm_package_version; git tag v$npm_package_version && git push --tags && git push && npm run create-release"
   },
   "author": "Scott Bender",
   "license": "Apache-2.0",
   "devDependencies": {
-    "github-changes": "^1.1.2"
+    "@signalk/github-create-release": "^1.0.1"
   },
   "repository": {
     "type": "git",
