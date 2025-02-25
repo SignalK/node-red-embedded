@@ -18,7 +18,7 @@ module.exports = function(RED) {
         return
       }
 
-      let path = msg.topic
+      let path = config.path ? config.path : msg.topic
 
       if ( typeof config.meta !== 'undefined' && config.meta !== "" && !sentMeta[path] ) {
         let delta = {
