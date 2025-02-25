@@ -6,7 +6,7 @@ module.exports = function(RED) {
 
     var app = node.context().global.get('app')
     var source = config.name ? 'node-red-' + config.name : 'node-red'
-    var sentMeta = false
+    var sentMeta = {}
 
     function showStatus(text) {
       node.status({fill:"green",shape:"dot",text:text});
@@ -18,14 +18,16 @@ module.exports = function(RED) {
         return
       }
 
-      if ( typeof config.meta !== 'undefined' && config.meta !== "" && !sentMeta ) {
+      let path = msg.topic
+
+      if ( typeof config.meta !== 'undefined' && config.meta !== "" && !sentMeta[path] ) {
         let delta = {
           updates: [
             {
               meta: [
                 {
                   value: JSON.parse(config.meta),
-                  path: msg.topic
+                  path
                 }
               ]
             }
@@ -35,7 +37,7 @@ module.exports = function(RED) {
           delta.updates[0].$source = config.source
         }
         app.handleMessage(source, delta)
-        sentMeta = true
+        sentMeta[path] = true
       }
       
       let delta = {
@@ -44,7 +46,7 @@ module.exports = function(RED) {
             values: [
               {
                 value: msg.payload,
-                path: msg.topic
+                path
               }
             ]
           }
@@ -53,8 +55,8 @@ module.exports = function(RED) {
       if ( config.source && config.source.length > 0 ) {
         delta.updates[0].$source = config.source
       }
-      let c = msg.topic.lastIndexOf('.')
-      showStatus(`${msg.topic.substring(c+1)}: ${msg.payload}`)
+      let c = path.lastIndexOf('.')
+      showStatus(`${path.substring(c+1)}: ${msg.payload}`)
       app.handleMessage(source, delta)
     })
   }
