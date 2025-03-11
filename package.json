@@ -8,9 +8,6 @@
   },
   "author": "Scott Bender",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "@signalk/github-create-release": "^1.0.1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/SignalK/node-red-embedded"
