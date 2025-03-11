@@ -1,11 +1,11 @@
 {
   "name": "@signalk/node-red-embedded",
-  "version": "2.18.0",
+  "version": "2.18.1",
   "description": "Node red nodes for use with the signalk-node-red plugin",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "create-release": "github-create-release --owner signalk --repository node-red-embedded",
+    "create-release": "github-create-release --owner signalk --repository node-red-embedded",
     "release": "git tag -d v$npm_package_version; git tag v$npm_package_version && git push --tags && git push && npm run create-release"
   },
   "author": "Scott Bender",
