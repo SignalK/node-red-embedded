@@ -41,6 +41,10 @@ module.exports = function(RED) {
       if ( typeof source !== 'undefined' &&  source.length === 0 ) {
         source = undefined
       }
+
+      if ( !path.startsWith('notifications.') ) {
+        path = 'notifications.' + path
+      }
       
       let delta = {
         updates: [
@@ -48,7 +52,7 @@ module.exports = function(RED) {
             $source: source,
             values: [
               {
-                path: 'notifications.' + path,
+                path,
                 value: {
                   state: state,
                   method: method,
