@@ -2,7 +2,7 @@
     {
         "id": "219b9c95.4e0d5c",
         "type": "inject",
-        "z": "db137791.d0f408",
+        "z": "1a65e795a2e4022a",
         "name": "",
         "props": [
             {
@@ -20,8 +20,8 @@
         "topic": "red.autoLights.state",
         "payload": "autoLights",
         "payloadType": "global",
-        "x": 110,
-        "y": 740,
+        "x": 210,
+        "y": 680,
         "wires": [
             [
                 "d863107a.7222a"
@@ -31,18 +31,19 @@
     {
         "id": "d863107a.7222a",
         "type": "signalk-send-pathvalue",
-        "z": "db137791.d0f408",
+        "z": "1a65e795a2e4022a",
         "name": "send autoLights",
+        "path": "",
         "source": "",
-        "meta": "",
-        "x": 560,
-        "y": 740,
+        "meta": "{\"units\": \"bool\"}",
+        "x": 660,
+        "y": 680,
         "wires": []
     },
     {
         "id": "c1701506.ea4a48",
         "type": "inject",
-        "z": "db137791.d0f408",
+        "z": "1a65e795a2e4022a",
         "name": "",
         "props": [
             {
@@ -58,10 +59,10 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 70,
-        "y": 780,
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 170,
+        "y": 720,
         "wires": [
             [
                 "abd5ad13.d9ec6"
@@ -71,7 +72,7 @@
     {
         "id": "abd5ad13.d9ec6",
         "type": "change",
-        "z": "db137791.d0f408",
+        "z": "1a65e795a2e4022a",
         "name": "",
         "rules": [
             {
@@ -94,8 +95,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 280,
-        "y": 800,
+        "x": 380,
+        "y": 740,
         "wires": [
             [
                 "d863107a.7222a"
@@ -105,11 +106,11 @@
     {
         "id": "fdaeb90a.e8809",
         "type": "signalk-put-handler",
-        "z": "db137791.d0f408",
+        "z": "1a65e795a2e4022a",
         "name": "",
         "path": "red.autoLights.state",
-        "x": 90,
-        "y": 840,
+        "x": 190,
+        "y": 780,
         "wires": [
             [
                 "abd5ad13.d9ec6"
