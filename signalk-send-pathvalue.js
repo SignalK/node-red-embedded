@@ -13,12 +13,12 @@ module.exports = function(RED) {
     }
     
     node.on('input', msg => {
-      if ( !msg.topic ) {
-        node.error('no topic for incomming message')
+      let path = config.path ? config.path : msg.topic
+
+      if ( !path ) {
+        node.error('no topic or path configured')
         return
       }
-
-      let path = config.path ? config.path : msg.topic
 
       if ( typeof config.meta !== 'undefined' && config.meta !== "" && !sentMeta[path] ) {
         let delta = {
