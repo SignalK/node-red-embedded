@@ -33,12 +33,14 @@ module.exports = function(RED) {
             if ( !app.queryRequest || (reply.state === 'COMPLETED' && reply.statusCode === 200) ) {
               fill = 'green'
               text = `value: ${msg.payload}`
+              node.send([msg, null])
             } else if ( reply.state === 'PENDING' ) {
               fill = 'yellow'
               text = 'pending...'
             } else {
               fill = 'red'
               text = `error : ${reply.statusCode} ${reply.message || ''}`
+              node.send([null, msg])
             }
             node.status({fill:fill,shape:"dot",text:text})
           })
