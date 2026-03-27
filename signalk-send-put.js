@@ -11,7 +11,7 @@ module.exports = function(RED) {
       console.error(err.stack)
       node.status({fill:"red",shape:"dot",text:err.message})
     }
-    
+
     node.on('input', msg => {
       node.status({fill:"yellow",shape:"dot",text:`sending...`})
       try {
@@ -20,31 +20,16 @@ module.exports = function(RED) {
           if ( reply.state === 'COMPLETED' ) {
             if ( reply.statusCode === 200 ) {
               node.status({fill:'green',shape:"dot",text:`value: ${msg.payload}`})
+              node.send([{ payload: reply}, null])
+            } else if ( reply.state === 'PENDING' ) {
+              node.status({fill:'yellow',shape:"dot",text:'pending...'})
             } else {
               node.status({fill:'red',shape:"dot",text:`error`})
               node.error(`put error ${reply.statusCode} ${reply.message || ''}`)
+              node.send([null, { payload: reply}])
             }
           }
         }, config.source && config.source.length > 0 ? config.source : undefined)
-        Promise.resolve(res)
-          .then(reply => {
-            let fill
-            let text
-            if ( !app.queryRequest || (reply.state === 'COMPLETED' && reply.statusCode === 200) ) {
-              fill = 'green'
-              text = `value: ${msg.payload}`
-              node.send([msg, null])
-            } else if ( reply.state === 'PENDING' ) {
-              fill = 'yellow'
-              text = 'pending...'
-            } else {
-              fill = 'red'
-              text = `error : ${reply.statusCode} ${reply.message || ''}`
-              node.send([null, msg])
-            }
-            node.status({fill:fill,shape:"dot",text:text})
-          })
-          .catch(onError)
       } catch (err) {
         onError(err)
       }
