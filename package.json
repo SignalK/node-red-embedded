@@ -32,6 +32,8 @@
       "signalk-geofence-switch": "signalk-geofence-switch.js",
       "signalk-delay": "signalk-delay.js",
       "signalk-put-handler": "signalk-put-handler.js",
+      "signalk-put-error": "signalk-put-error.js",
+      "signalk-put-success": "signalk-put-success.js",
       "signalk-input-handler-next": "signalk-input-handler-next.js",
       "signalk-input-handler": "signalk-input-handler.js"
     }

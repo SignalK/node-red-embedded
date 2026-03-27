@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-put-error',{
+        category: 'Signal K',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""}
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "bridge.png",
+        align: 'right',
+        label: function() {
+            return this.name||"signalk-put-error";
+        },
+        paletteLabel: 'put error'
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-put-error">
+  <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-put-error">
+  <p>Respond to a pending PUT request with an error.</p>
+</script>

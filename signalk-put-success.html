@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-put-success',{
+        category: 'Signal K',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""}
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: "bridge.png",
+        align: 'right',
+        label: function() {
+            return this.name||"signalk-put-success";
+        },
+        paletteLabel: 'put success'
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-put-success">
+  <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-put-success">
+  <p>Respond to a pending PUT request with success.</p>
+</script>

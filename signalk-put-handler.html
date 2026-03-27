@@ -4,7 +4,8 @@
         color: '#ffcc01',
         defaults: {
           name: {value:""},
-          path: {value:""}
+          path: {value:""},
+          pending: {value: false},
         },
         inputs:0,
         outputs:1,
@@ -25,8 +26,13 @@
         <label for="node-input-path"><i class="icon-tag"></i> Path</label>
         <input type="text" id="node-input-path" placeholder="Path">
   </div>
+  <div class="form-row">
+        <label for="node-input-pending"><i class="icon-tag"></i> Use Put Response</label>
+        <input type="checkbox" id="node-input-pending">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="signalk-put-handler">
     <p>Input that sends messages when a PUT is sent to the server for the given path</p>
+    <p>If "Use Put Response" is checked, the node will respond with status PENDING, use the signalk-put-response node to handle the response.</p>
 </script>
