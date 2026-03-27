@@ -7,8 +7,13 @@ module.exports = function(RED) {
     var app = node.context().global.get('app')
 
     function handlePut(context, path, value, cb) {
-      node.send({topic: path, payload: value})
-      return { state: 'SUCCESS' }
+      if ( config.pending ) {
+        node.send({topic: path, payload: value, putCallBack: cb})
+        return { state: 'PENDING' }
+      } else {
+        node.send({topic: path, payload: value})
+        return { state: 'SUCCESS' }
+      }
     }
 
     let deReg = app.registerActionHandler('vessels.self', config.path,
