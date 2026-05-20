@@ -18,6 +18,7 @@
   "node-red": {
     "nodes": {
       "signalk-subscribe": "signalk-subscribe.js",
+      "signalk-get": "signalk-get.js",
       "signalk-notification-": "signalk-notification.js",
       "signalk-on-delta": "signalk-on-delta.js",
       "signalk-app-event": "signalk-app-event.js",
