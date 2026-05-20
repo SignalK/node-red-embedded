@@ -1,0 +1,34 @@
+<script type="text/javascript">
+  RED.nodes.registerType('signalk-get',{
+    category: 'Signal K',
+    color: '#ffcc01',
+    defaults: {
+      name: {value:""},
+      path: {value:""},
+    },
+    inputs:1,
+    outputs:2,
+    outputLabels: [ 'found', 'not found' ],
+    icon: "bridge.png",
+    align: 'right',
+    label: function() {
+      return this.name||"signalk-get";
+    },
+    paletteLabel: 'get'
+  });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-get">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+    <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-get">
+  <p>Output that retrieves a SignalK value via `app.getSelfPath`. Input should be the path to get. The topic will be used as the path if none is entered.</p>
+</script>
