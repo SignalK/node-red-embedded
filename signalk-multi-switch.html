@@ -6,6 +6,7 @@
           name: {value:""},
           path: {value:"", required: true},
           displayName: {value:""},
+          optionType: { value: 'string', required: true },
           options: { value: [], required: true } 
         },
         inputs:1,
@@ -22,20 +23,42 @@
             $('#node-input-options-container').editableList({
                 addItem: function (container, i, data) {
                     // This runs when the "Add" button is clicked
-                    var row = $('<div/>').appendTo(container);
+                    var row = $('<div/>', {
+                        style: 'display: flex; gap: 8px;'
+                    }).appendTo(container);
 
-                    // Create the text input field for each username
-                    var inputField = $('<input/>', {
-                        class: "node-input-option-value",
+                    var titleField = $('<input/>', {
+                        class: "node-input-option-title",
                         type: "text",
-                        style: "width: 100%;"
+                        placeholder: "Title",
+                        style: "width: 50%;"
                     }).appendTo(row);
 
-                    // If loading existing data, populate the field
-                    if (data.option) {
-                        inputField.val(data.option);
+                    var valueField = $('<input/>', {
+                        class: "node-input-option-value",
+                        type: "text",
+                        placeholder: "Value",
+                        style: "width: 50%;"
+                    }).appendTo(row);
+
+                    var optionValue;
+
+                    if (data.option && typeof data.option === 'object') {
+                        optionValue = data.option.value;
+                    } else {
+                        optionValue = data.option;
                     }
-                },
+
+                    if (optionValue !== undefined && optionValue !== null) {
+                        valueField.val(String(optionValue));
+                    }
+
+                    if (data.option && typeof data.option === 'object') {
+                        titleField.val(data.option.title || '');
+                    } else if (data.option) {
+                        titleField.val(data.option);
+                    }
+                    },
                 sortable: true, // Optional: allows drag-and-drop reordering
                 removable: true // Adds a delete icon next to each row
             });
@@ -50,15 +73,41 @@
         oneditsave: function () {
             var node = this;
             var optionsList = $('#node-input-options-container').editableList('items');
+            var validationErrors = [];
+            var optionType = $('#node-input-optionType').val();
             node.options = [];
 
             // Loop through UI rows and save values back to the array
-            optionsList.each(function () {
-                var optionValue = $(this).find(".node-input-option-value").val();
-                if (optionValue) {
-                    node.options.push(optionValue);
+            optionsList.each(function (index) {
+                var optionTitle = $(this).find(".node-input-option-title").val();
+                var optionRawValue = $(this).find(".node-input-option-value").val().trim();
+
+                if (optionRawValue) {
+                    var parsedValue = optionRawValue;
+
+                    if (optionType === 'number') {
+                        var numValidation = RED.utils.validateTypedProperty(optionRawValue, 'num');
+                        if (numValidation !== true) {
+                            validationErrors.push(index + 1);
+                            return;
+                        }
+                        parsedValue = Number(optionRawValue);
+                    }
+
+                    node.options.push({
+                        title: optionTitle || optionRawValue,
+                        value: parsedValue
+                    });
                 }
             });
+
+            if (validationErrors.length > 0) {
+                RED.notify(
+                    'Invalid numeric value in option row(s): ' + validationErrors.join(', '),
+                    'error'
+                );
+                throw new Error('Invalid option value');
+            }
         }
     
     });
@@ -77,6 +126,13 @@
         <label for="node-input-displayName"><i class="icon-tag"></i> Display Name</label>
         <input type="text" id="node-input-displayName" placeholder="Display Name">
   </div>
+    <div class="form-row">
+                <label for="node-input-optionType"><i class="icon-tag"></i> Option Type</label>
+                <select id="node-input-optionType">
+                    <option value="string">string</option>
+                    <option value="number">number</option>
+                </select>
+    </div>
   <div class="form-row" style="margin-bottom:0px;">
     <label><i class="fa fa-cogs"></i> Options</label>
   </div>
@@ -89,4 +145,5 @@
     <p>Multi switch for the given path in the Signal K server. ".state" will be appended automatically if not present.</p>
     <p>The state of the switch is stored in the global context in a store called skpersist which defaults to localstorage.</p>
     <p>The options are defined in the node configuration, and the payload of incoming messages must match one of the options.</p>
+    <p>All option values must use the selected Option Type.</p>
 </script>

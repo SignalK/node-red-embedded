@@ -6,6 +6,15 @@ module.exports = function(RED) {
     RED.nodes.createNode(this,config);
     const node = this;
 
+    function getOptionWithValue(value) {
+      return config.options.find(opt => opt.value == value)
+    }
+
+    function setStatusWithValue(value) {
+      const option = getOptionWithValue(value)
+      node.status({ fill: "green", shape: "dot", text: `value: ${option ? option.title : value}` });
+    }
+
     const globalContext = node.context().global
     const app = globalContext.get('app')
 
@@ -23,15 +32,16 @@ module.exports = function(RED) {
     }
 
     function handlePut(context, path, value, cb) {
-      if ( config.options.indexOf(value) === -1 ) {
+      const option = getOptionWithValue(value)
+      if ( !option ) {
         node.error(`invalid value: ${value}`)
         node.status({ fill: "red", shape: "dot", text: `invalid value: ${value}` })
         return { state: 'COMPLETED', statusCode:400, message: 'Invalid value' }
       } else {
-        globalContext.set(path, value, storeName)
-        sendUpdate(value)
-        node.send({ topic: path, payload: value })
-        node.status({ fill: "green", shape: "dot", text: `put received: ${value}` })
+        globalContext.set(path, option.value, storeName)
+        sendUpdate(option.value)
+        node.send({ topic: path, payload: option.value })
+        node.status({ fill: "green", shape: "dot", text: `put received: ${option.title}` })
         return { state: 'SUCCESS' }
       }
     }
@@ -57,7 +67,7 @@ module.exports = function(RED) {
     let resendInterval
 
     globalContext.get(path, storeName, (err, value) => {
-      let possibleValues = config.options.map(option => ({ title: option, value: option }))
+      let possibleValues = config.options
 
       let delta = {
         updates: [
@@ -77,25 +87,26 @@ module.exports = function(RED) {
       }
       app.handleMessage('signalk-node-red', delta)
 
-      sendUpdate(value !== undefined ? value : config.options[0])
+      sendUpdate(value !== undefined ? value : config.options[0].value)
       resendInterval = setInterval(() => {
         globalContext.get(path, storeName, (err, value) => {
-          value = value !== undefined ? value : config.options[0]
+          value = value !== undefined ? value : config.options[0].value
           sendUpdate(value)
-          node.status({ fill: "green", shape: "dot", text: `value: ${value}` });
+          setStatusWithValue(value);
         })
       }, 5000)
       
     })
 
     node.on('input', msg => {
-      if ( config.options.indexOf(msg.payload) !== -1 ) {
-        globalContext.set(path, msg.payload, storeName)
-        sendUpdate(msg.payload)
-        node.status({fill:"green",shape:"dot",text:`input: ${msg.payload}`});
-        node.send({topic: path, payload: msg.payload})
+      const option = getOptionWithValue(msg.payload)
+      if ( option ) {
+        globalContext.set(path, option.value, storeName)
+        sendUpdate(option.value)
+        node.status({fill:"green",shape:"dot",text:`input: ${option.title}`});
+        node.send({topic: path, payload: option.value})
       } else {
-        node.error(`payload must be one of: ${config.options.join(', ')}`)
+        node.error(`payload must be one of: ${config.options.map(opt => opt.value).join(', ')}`)
         node.status({fill:"red",shape:"dot",text:`invalid input`});
       }
     })
