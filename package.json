@@ -39,7 +39,8 @@
       "signalk-input-handler": "signalk-input-handler.js",
       "signalk-toggle-switch": "signalk-toggle-switch.js",
       "signalk-multi-switch": "signalk-multi-switch.js",
-      "signalk-dimmer-switch": "signalk-dimmer-switch.js"
+      "signalk-dimmer-switch": "signalk-dimmer-switch.js",
+      "signalk-slider-switch": "signalk-slider-switch.js"
     }
   }
 }
