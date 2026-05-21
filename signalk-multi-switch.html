@@ -1,0 +1,92 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-multi-switch',{
+        category: 'Signal K',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""},
+          path: {value:"", required: true},
+          displayName: {value:""},
+          options: { value: [], required: true } 
+        },
+        inputs:1,
+        outputs:1,
+        outputLabels: [ 'state' ],
+        inputLabels: [ 'state' ],
+        icon: "bridge.png",
+        label: function() {
+            return this.name||"signalk-multi-switch";
+        },
+        paletteLabel: 'multi switch',
+        oneditprepare: function() {
+            // Initialize the Editable List widget
+            $('#node-input-options-container').editableList({
+                addItem: function (container, i, data) {
+                    // This runs when the "Add" button is clicked
+                    var row = $('<div/>').appendTo(container);
+
+                    // Create the text input field for each username
+                    var inputField = $('<input/>', {
+                        class: "node-input-option-value",
+                        type: "text",
+                        style: "width: 100%;"
+                    }).appendTo(row);
+
+                    // If loading existing data, populate the field
+                    if (data.option) {
+                        inputField.val(data.option);
+                    }
+                },
+                sortable: true, // Optional: allows drag-and-drop reordering
+                removable: true // Adds a delete icon next to each row
+            });
+
+            // Load existing items into the UI when opening the dialog
+            if (this.options) {
+                this.options.forEach(function (option) {
+                    $('#node-input-options-container').editableList('addItem', { option: option });
+                });
+            }
+        },
+        oneditsave: function () {
+            var node = this;
+            var optionsList = $('#node-input-options-container').editableList('items');
+            node.options = [];
+
+            // Loop through UI rows and save values back to the array
+            optionsList.each(function () {
+                var optionValue = $(this).find(".node-input-option-value").val();
+                if (optionValue) {
+                    node.options.push(optionValue);
+                }
+            });
+        }
+    
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-multi-switch">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+        <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+        <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+  <div class="form-row">
+        <label for="node-input-displayName"><i class="icon-tag"></i> Display Name</label>
+        <input type="text" id="node-input-displayName" placeholder="Display Name">
+  </div>
+  <div class="form-row" style="margin-bottom:0px;">
+    <label><i class="fa fa-cogs"></i> Options</label>
+  </div>
+  <div class="form-row node-input-options-container-row">
+    <ol id="node-input-options-container"></ol>
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-multi-switch">
+    <p>Multi switch for the given path in the Signal K server. ".state" will be appended automatically if not present.</p>
+    <p>The state of the switch is stored in the global context in a store called skpersist which defaults to localstorage.</p>
+    <p>The options are defined in the node configuration, and the payload of incoming messages must match one of the options.</p>
+</script>
