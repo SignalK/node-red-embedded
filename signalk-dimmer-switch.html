@@ -1,0 +1,47 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-dimmer-switch', {
+        category: 'Signal K',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""},
+          path: {value:"", required: true},
+          displayName: {value:""},
+          includeState: {value:false}
+        },
+        inputs:1,
+        outputs:3,
+        outputLabels: [ 'dimming level', 'state', 'object' ],
+        icon: 'bridge.png',
+        label: function() {
+            return this.name || 'signalk-dimmer-switch';
+        },
+        paletteLabel: 'dimmer switch'
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-dimmer-switch">
+  <div class="form-row">
+      <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+      <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+  <div class="form-row">
+      <label for="node-input-displayName"><i class="icon-tag"></i> Display Name</label>
+      <input type="text" id="node-input-displayName" placeholder="Display Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-includeState"><i class="icon-tag"></i> Include State</label>
+      <input type="checkbox" id="node-input-includeState" style="display:inline-block; width:22px; vertical-align:middle;">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-dimmer-switch">
+    <p>Dimmer switch for the given path in the Signal K server.</p>
+    <p>The node always publishes a path ending in <code>.dimmingLevel</code> with a numeric ratio between 0 and 1.</p>
+    <p>If Include State is enabled, the node also publishes <code>.state</code> as a boolean value.</p>
+    <p>The values are stored in the global context in a store called skpersist which defaults to localstorage.</p>
+    <p>Input should be a number for dimmingLevel, a boolean for state, or an object containing 'dimmingLevel' as a number between 0 and 1, and optionally 'state' as a boolean.</p>
+</script>
