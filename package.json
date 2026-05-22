@@ -36,7 +36,11 @@
       "signalk-put-error": "signalk-put-error.js",
       "signalk-put-success": "signalk-put-success.js",
       "signalk-input-handler-next": "signalk-input-handler-next.js",
-      "signalk-input-handler": "signalk-input-handler.js"
+      "signalk-input-handler": "signalk-input-handler.js",
+      "signalk-toggle-switch": "signalk-toggle-switch.js",
+      "signalk-multi-switch": "signalk-multi-switch.js",
+      "signalk-dimmer-switch": "signalk-dimmer-switch.js",
+      "signalk-slider-switch": "signalk-slider-switch.js"
     }
   }
 }

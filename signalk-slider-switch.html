@@ -1,0 +1,61 @@
+<script type="text/javascript">
+    RED.nodes.registerType('signalk-slider-switch', {
+        category: 'Signal K',
+        color: '#ffcc01',
+        defaults: {
+          name: {value:""},
+          path: {value:"", required: true},
+          displayName: {value:""},
+          units: {value:""},
+          rangeMin: {value:0, required:true, validate: RED.validators.number()},
+          rangeMax: {value:100, required:true, validate: RED.validators.number()},
+          stepSize: {value:"", validate: RED.validators.number(true)}
+        },
+        inputs:1,
+        outputs:1,
+        outputLabels: [ 'state' ],
+        inputLabels: [ 'state' ],
+        icon: 'bridge.png',
+        label: function() {
+            return this.name || 'signalk-slider-switch';
+        },
+        paletteLabel: 'slider switch'
+    });
+</script>
+
+<script type="text/x-red" data-template-name="signalk-slider-switch">
+  <div class="form-row">
+      <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-path"><i class="icon-tag"></i> Path</label>
+      <input type="text" id="node-input-path" placeholder="Path">
+  </div>
+  <div class="form-row">
+      <label for="node-input-displayName"><i class="icon-tag"></i> Display Name</label>
+      <input type="text" id="node-input-displayName" placeholder="Display Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-units"><i class="icon-tag"></i> Units</label>
+      <input type="text" id="node-input-units" placeholder="Units">
+  </div>
+  <div class="form-row">
+      <label for="node-input-rangeMin"><i class="icon-tag"></i> Range Min</label>
+      <input type="text" id="node-input-rangeMin" placeholder="0">
+  </div>
+  <div class="form-row">
+      <label for="node-input-rangeMax"><i class="icon-tag"></i> Range Max</label>
+      <input type="text" id="node-input-rangeMax" placeholder="100">
+  </div>
+  <div class="form-row">
+      <label for="node-input-stepSize"><i class="icon-tag"></i> Step Size</label>
+      <input type="text" id="node-input-stepSize" placeholder="optional">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="signalk-slider-switch">
+    <p>Slider switch for the given path in the Signal K server. ".state" will be appended automatically if not present.</p>
+    <p>The value must be a number within the configured range.</p>
+    <p>The value is stored in the global context in a store called skpersist which defaults to localstorage.</p>
+</script>
